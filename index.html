@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Tree</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+
+    <header class="d-flex justify-content-end align-items-center p-3">
+        <button class="btn btn-outline-light btn-sm" onclick="shareSite()">
+            <i class="bi bi-share-fill"></i> Share
+        </button>
+    </header>
+
+    <div class="container d-flex flex-column align-items-center justify-content-center mt-1">
+        <div class="image-container">
+            <img src="/img/pr.jpg" alt="Profile image" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+        </div>
+
+        <h1 class="mb-4">Neng phanath</h1>
+
+        <div class="w-100">
+            
+            <a href="https://www.instagram.com/nath_twenty3/" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
+                <i class="bi bi-instagram fs-4 position-absolute start-0 ms-3"></i>
+                <span class="mx-auto">Instagram</span>
+                <div class="share-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                    <i class="bi bi-box-arrow-up fs-5"></i>
+                </div>
+            </a>
+            <a href="https://www.facebook.com/nath.twenty3/" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
+                <i class="bi bi-facebook fs-4 position-absolute start-0 ms-3"></i>
+                <span class="mx-auto">Facebook</span>
+                <div class="share-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                    <i class="bi bi-box-arrow-up fs-5"></i>
+                </div>
+            </a>
+            <a href="https://t.me/NENGPHANATH" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
+                <i class="bi bi-telegram fs-4 position-absolute start-0 ms-3"></i>
+                <span class="mx-auto">Telegram</span>
+                <div class="share-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                    <i class="bi bi-box-arrow-up fs-5"></i>
+                </div>
+            </a>
+            <a href="https://www.facebook.com/nath.twenty3/" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
+                <i class="bi bi-instagram fs-4 position-absolute start-0 ms-3"></i>
+                <span class="mx-auto">Instagram</span>
+                <div class="share-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                    <i class="bi bi-box-arrow-up fs-5"></i>
+                </div>
+            </a>
+        </div>
+
+    </div>
+    
+    
+    <script src="scrip.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+</html>
