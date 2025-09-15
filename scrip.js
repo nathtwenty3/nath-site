@@ -10,7 +10,7 @@ function copyHref(el) {
         navigator.clipboard.writeText(url).then(() => {
             el.innerHTML = '<i class="bi bi-check2"></i> Copied!';
             setTimeout(() => {
-                el.innerHTML = '<i class="bi bi-box-arrow-up fs-5"></i>';
+                el.innerHTML = '<i class="bi bi-link-45deg fs-5"></i>';
             }, 3000);
         }).catch(err => {
             console.error('Copy failed:', err);

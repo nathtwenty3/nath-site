@@ -1,19 +1,27 @@
 .share-btn:hover{
-    color: rgb(0, 204, 255);
+    /* color: rgb(0, 204, 255); */
+    color: #dc136b;
 }
-
 a.tile:hover {
-  /* background-color: #ffffff14; */
-  color: #ffffff;
   transform: scale(1.01);
-  box-shadow: 0 4px 17px rgba(0, 204, 255, 0.2);
+  /* box-shadow: 0 4px 17px rgba(220, 19, 107, 0.2); */
+  box-shadow: 0 4px 17px rgba(222, 222, 222, 0.2);
   transition: cubic-bezier(.07, 1.41, .82, 1.41) 0.2s;
 }
 .tile{
   text-decoration: none;
-  /* background-color:#ffffff14; */
   border-radius: 10px ;
 }
 .image-container img{
-    box-shadow: 2px 6px 17px rgba(0, 204, 255, 0.3);
+    box-shadow: 1px 6px 17px rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+.image-container img:hover{
+  transform: translateY(-2px);
+}
+
+.icon-bar a:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+  color: #ff64a7 !important;
 }
