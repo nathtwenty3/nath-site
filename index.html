@@ -15,8 +15,8 @@
 <body>
 
     <header class="d-flex justify-content-end align-items-center p-3">
-        <button class="btn btn-outline-light btn-sm" onclick="shareSite()">
-            <i class="bi bi-share-fill"></i> Share
+        <button class="share-btn btn btn-outline-light btn-sm" onclick="shareSite()">
+            <i class="bi bi-share"></i> Share
         </button>
     </header>
 
@@ -29,32 +29,31 @@
         <h1 class="mb-4">Neng phanath</h1>
 
         <div class="w-100">
-            
             <a href="https://www.instagram.com/nath_twenty3/" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
                 <i class="bi bi-instagram fs-4 position-absolute start-0 ms-3"></i>
                 <span class="mx-auto">Instagram</span>
-                <div class="share-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
                     <i class="bi bi-link-45deg fs-5"></i>
                 </div>
             </a>
             <a href="https://www.facebook.com/nath.twenty3/" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
                 <i class="bi bi-facebook fs-4 position-absolute start-0 ms-3"></i>
                 <span class="mx-auto">Facebook</span>
-                <div class="share-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
                     <i class="bi bi-link-45deg fs-5"></i>
                 </div>
             </a>
             <a href="https://t.me/NENGPHANATH" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
                 <i class="bi bi-telegram fs-4 position-absolute start-0 ms-3"></i>
                 <span class="mx-auto">Telegram</span>
-                <div class="share-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
                     <i class="bi bi-link-45deg fs-5"></i>
                 </div>
             </a>
             <a href="https://www.facebook.com/nath.twenty3/" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
                 <i class="bi bi-youtube fs-4 position-absolute start-0 ms-3"></i>
                 <span class="mx-auto">YouTube</span>
-                <div class="share-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
                     <i class="bi bi-link-45deg fs-5"></i>
                 </div>
             </a>
@@ -81,7 +80,7 @@
             <div class="modal-content bg-dark text-light">
                 <div class="modal-header border-0">
                     <h5 class="modal-title " id="imageModalLabel">@neng phanath</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
