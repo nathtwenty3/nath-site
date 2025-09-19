@@ -1,4 +1,4 @@
-.share-btn:hover{
+.share-btn:hover {
   color: #ff64a7;
   background: rgba(255, 102, 168, 0.1) !important;
 }
@@ -7,33 +7,33 @@ a.tile:hover {
   transform: scale(1.01);
   box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
   /* box-shadow: 0 4px 17px rgba(222, 222, 222, 0.2); */
-  transition: cubic-bezier(.07, 1.41, .82, 1.41) 0.2s;
+  transition: cubic-bezier(0.07, 1.41, 0.82, 1.41) 0.2s;
 }
-.tile{
+.tile {
   text-decoration: none;
-  border-radius: 10px ;
+  border-radius: 10px;
 }
-.image-container img{
-    box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
-    transition: all 0.2s ease-in-out;
+.image-container img {
+  box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
+  transition: all 0.2s ease-in-out;
 }
-.image-container img:hover{
+.image-container img:hover {
   transform: translateY(-2px);
 }
 
-.icon-bar a:hover{
+.icon-bar a:hover {
   transform: scale(1.1);
   transition: all 0.3s ease-in-out;
   color: #ff64a7 !important;
 }
 .contact-btn:hover {
-    background-color: rgba(255, 102, 168, 0.2);
-    color: #ff64a7;
-    transform: scale(1.1);
-    transition: all 0.2s ease-in-out;
+  background-color: rgba(255, 102, 168, 0.2);
+  color: #ff64a7;
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
 }
 .modal-content input,
-.modal-content textarea{
+.modal-content textarea {
   border: none;
   border-bottom: 1px solid #ccc;
   border-radius: 0;
@@ -51,5 +51,9 @@ a.tile:hover {
   .share-btn:hover {
     background-color: inherit !important;
     color: inherit !important;
+  }
+  .share-btn:active {
+    color: #ff64a7;
+    background: rgba(255, 102, 168, 0.1) !important;
   }
 }
