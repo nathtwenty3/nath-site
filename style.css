@@ -1,12 +1,11 @@
 .share-btn:hover {
   color: #ff64a7;
-  background: rgba(255, 102, 168, 0.1) !important;
+  background-color: rgba(255, 102, 168, 0.1) !important;
 }
 a.tile:hover {
-  background: rgba(255, 102, 168) !important;
+  background-color: rgba(255, 102, 168) !important;
   transform: scale(1.01);
   box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
-  /* box-shadow: 0 4px 17px rgba(222, 222, 222, 0.2); */
   transition: cubic-bezier(0.07, 1.41, 0.82, 1.41) 0.2s;
 }
 .tile {
@@ -47,13 +46,23 @@ a.tile:hover {
   box-shadow: none;
 }
 
+
 @media (hover: none) {
   .share-btn:hover {
     background-color: inherit !important;
     color: inherit !important;
   }
   .share-btn:active {
-    color: #ff64a7;
-    background: rgba(255, 102, 168, 0.1) !important;
+    color: #ff64a7 !important;
+    background: rgba(255, 102, 168, 0.1) !important
   }
+}
+#formAlert {
+  margin-bottom: 1rem;
+  /* max-width: 300px; */
+  border-radius: 8px;
+  background-color: rgba(255, 102, 168, 0.2);
+  color: #ff64a7;
+  border: 1px solid rgba(255, 102, 168, 0.4);
+  box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
 }

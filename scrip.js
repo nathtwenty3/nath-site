@@ -86,6 +86,8 @@ form.addEventListener('submit', function (e) {
     });
 });
 
+
+
 // // Show success alert
 // alertBox.classList.remove('d-none');
 // alertBox.classList.add('show');
@@ -101,3 +103,12 @@ form.addEventListener('submit', function (e) {
 
 // return false;
 
+// function showTestAlert() {
+//     const alertBox = document.getElementById('formAlert');
+//     alertBox.classList.remove('d-none');
+//     alertBox.classList.add('show');
+
+//     setTimeout(() => {
+//         alertBox.classList.add('d-none');
+//     }, 2000);
+// }
