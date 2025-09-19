@@ -41,4 +41,63 @@ function shareSite() {
     }
 }
 
+const form = document.getElementById('contactForm')
+const alertBox = document.getElementById('formAlert');
+const modalElement = document.getElementById('contactModal');
+const submitBtn = form.querySelector('button[type="submit"]');
+
+form.addEventListener('submit', function (e) {
+    e.preventDefault(); // Stop default form submission
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...`;
+
+    const formData = new FormData(form);
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            alertBox.classList.remove('d-none');
+            alertBox.classList.add('show');
+            form.reset();
+
+            modalInstance.hide(); // Close modal
+            submitBtn.innerHTML = "SEND";
+            setTimeout(() => {
+                alertBox.classList.add('d-none'); // Hide alert
+                submitBtn.disabled = false;
+            }, 4000);
+        } else {
+            alertBox.textContent = "Something went wrong. Please try again.";
+            alertBox.classList.remove('d-none');
+            submitBtn.disabled = false;
+        }
+    }).catch(()=>{
+        alertBox.textContent = "Network error. Please try again.";
+        alertBox.classList.remove('d-none');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "SEND MESSAGE";
+    });
+});
+
+// // Show success alert
+// alertBox.classList.remove('d-none');
+// alertBox.classList.add('show');
+
+// // Reset form
+// modalElement.querySelector('form').reset();
+
+// // Auto-close modal after 2 seconds
+// modalInstance.hide();
+// setTimeout(() => {
+//     alertBox.classList.add('d-none'); // Hide alert after closing
+// }, 2000);
+
+// return false;
 
