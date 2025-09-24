@@ -46,14 +46,6 @@ a.tile:hover {
   box-shadow: none;
 }
 
-/* Hide the green check feedback */
-.form-control.is-valid,
-.was-validated .form-control:valid {
-  border-color: inherit !important;
-  background-image: none !important;
-}
-
-
 @media (hover: none) {
   .share-btn:hover {
     background-color: inherit !important;
@@ -65,12 +57,28 @@ a.tile:hover {
   }
 }
 
-#formAlert {
+/* #formAlert {
   margin-bottom: 1rem;
-  /* max-width: 300px; */
+  max-width: 300px;
   border-radius: 8px;
   background-color: rgba(255, 102, 168, 0.2);
   color: #ff64a7;
   border: 1px solid rgba(255, 102, 168, 0.4);
   box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
+} */
+
+#formAlert {
+  position: fixed;
+  left: 50%;
+  width: auto;
+  border-radius: 8px;
+  background-color: rgba(255, 102, 168, 0.2);
+  color: #ff64a7;
+  border: 1px solid rgba(255, 102, 168, 0.4);
+  box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
+  transform: translateX(-50%);
 }
+
+
+
+
