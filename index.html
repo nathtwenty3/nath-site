@@ -111,26 +111,30 @@
                     <h2>Contact me</h2>
                     <button type="button" class="btn-close shadow-none position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <!-- <form action="#" method="POST"> -->
-                <form id="contactForm" action="https://formspree.io/f/xgvljbzy" method="POST">
+                
+                <!-- <form id="contactForm" action="https://formspree.io/f/xgvljbzy" method="POST"> -->
+                <form id="contactForm" onsubmit="return sendToTelegram();" class="needs-validation" novalidate>
                     <div class="modal-body mt-2">
-                        <input type="hidden" name="_next" value="#contactModal">
                         <div class="mb-4">
-                            <input type="name" name="name" class="form-control shadow-none" id="contactFormControlInput1" placeholder="Your name" required>
+                            <input type="text" name="name" class="form-control shadow-none"  placeholder="Your name">
                         </div>
                         <div class="mb-4">
-                            <input type="email" name="email" class="form-control shadow-none" id="contactFormControlInput1" placeholder="E-mail" required>
+                            <input type="email" name="email" class="form-control shadow-none" placeholder="E-mail" required>
+                            <div class="invalid-feedback">Please enter your email.</div>
                         </div>
                         <div class="mb-4">
-                            <input type="phone" name="phone" class="form-control shadow-none" id="contactFormControlInput1" placeholder="Phone number">
+                            <input type="tel" name="phone" class="form-control shadow-none"  placeholder="Phone number">
                         </div>
                         <div class="mb-4">
-                            <textarea class="form-control shadow-none" name="message" id="contactFormControlTextarea1" rows="4" placeholder="Type your message here..."></textarea>
+                            <textarea class="form-control shadow-none" name="message"  rows="4" placeholder="Type your message here..."></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="w-100 text-center">
                             <button type="submit" class="btn btn-outline-light">SEND</button>
+                        </div>
+                        <div id="formError" class="alert alert-danger text-center d-none" role="alert">
+                            Network error. Please try again.
                         </div>
                     </div>
                 </form>

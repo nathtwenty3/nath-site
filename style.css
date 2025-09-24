@@ -46,6 +46,13 @@ a.tile:hover {
   box-shadow: none;
 }
 
+/* Hide the green check feedback */
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  border-color: inherit !important;
+  background-image: none !important;
+}
+
 
 @media (hover: none) {
   .share-btn:hover {
@@ -57,6 +64,7 @@ a.tile:hover {
     background: rgba(255, 102, 168, 0.1) !important
   }
 }
+
 #formAlert {
   margin-bottom: 1rem;
   /* max-width: 300px; */
