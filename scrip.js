@@ -154,6 +154,7 @@ function sendToTelegram() {
     const modalEl = document.getElementById('contactModal');
     const form = document.getElementById('contactForm');
     const alertBox = document.getElementById('formAlert');
+    const errorBox = document.getElementById('formError');
     const submitBtn = form.querySelector('button[type="submit"]');
     const modalInstance = bootstrap.Modal.getInstance(modalEl) 
         || new bootstrap.Modal(modalEl);
@@ -224,12 +225,12 @@ function sendToTelegram() {
             if (data.ok) {
                 alertBox.classList.remove('d-none');
                 alertBox.classList.add('show');
-
+                
                 form.reset();
                 form.classList.remove('was-validated');
                 modalInstance.hide();
 
-                submitBtn.innerHTML = "SEND";
+                submitBtn.innerHTML = "Send";
                 setTimeout(() => {
                     alertBox.classList.add('d-none');
                     submitBtn.disabled = false;
@@ -239,13 +240,12 @@ function sendToTelegram() {
             }
         })
         .catch(err => {
-            const errorBox = document.getElementById('formError');
             clearTimeout(timeoutId);
             errorBox.classList.remove('d-none');
             errorBox.classList.add('show');
 
-            submitBtn.innerHTML = "SEND";
-            // submitBtn.disabled = false;
+            submitBtn.innerHTML = "Send";
+            submitBtn.disabled = false;
             console.error("Fetch error:", err)});
 
     return false;

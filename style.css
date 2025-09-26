@@ -4,6 +4,23 @@
   color: #ff64a7;
   background-color: rgba(255, 102, 168, 0.1) !important;
 }
+
+h1{
+  font-family: monospace;
+  width: 14ch;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid rgb(255, 255, 255);
+  animation: typing 2s steps(14) infinite alternate-reverse;
+  display: inline-block;
+}
+@keyframes typing {
+  from{
+    width: 0ch;
+  }
+}
+
+
 a.tile:hover {
   background-color: rgba(255, 102, 168) !important;
   transform: scale(1.01);
@@ -21,12 +38,33 @@ a.tile:hover {
 .image-container img:hover {
   transform: translateY(-2px);
 }
-
 .icon-bar a:hover {
   transform: scale(1.1);
   transition: all 0.3s ease-in-out;
   color: #ff64a7 !important;
 }
+.icon-bar i:hover{
+  text-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
+}
+
+/* .icon-bar i {
+  color: #fff;
+  text-shadow: 0 4px 12px rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease-in-out;
+}
+
+.icon-bar i:hover {
+  text-shadow: 0 4px 12px rgba(255, 255, 255, 0.9);
+  transform: scale(1.2);
+} */
+
+
+
+
+
+
+
+
 .contact-btn:hover {
   background-color: rgba(255, 102, 168, 0.2);
   color: #ff64a7;
@@ -49,34 +87,21 @@ a.tile:hover {
 }
 
 @media (hover: none) {
-  .share-btn:active {
+  .share-btn:active,
+  .share-btn:focus {
     color: #ff64a7 !important;
-    background-color: rgba(255, 102, 168, 0.1) !important;
+    background-color: rgba(255, 102, 168, 0.3) !important;
   }
 }
 
 
-/* #formAlert {
-  margin-bottom: 1rem;
-  max-width: 300px;
-  border-radius: 8px;
-  background-color: rgba(255, 102, 168, 0.2);
-  color: #ff64a7;
-  border: 1px solid rgba(255, 102, 168, 0.4);
-  box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
-} */
-
 #formAlert {
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  width: auto;
+  max-width: fit-content;
   border-radius: 8px;
   background-color: rgba(255, 102, 168, 0.2);
   color: #ff64a7;
   border: 1px solid rgba(255, 102, 168, 0.4);
   box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
-  transform: translateX(-50%);
 }
 
 .form-control.is-invalid,
@@ -84,3 +109,9 @@ a.tile:hover {
   border-color: inherit !important;
   box-shadow: none !important;
 }
+
+/* .form-control.is-valid,
+.was-validated .form-control:valid {
+  border-color: inherit !important;
+  background-image: none !important;
+} */

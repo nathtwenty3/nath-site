@@ -14,22 +14,23 @@
 </head>
 <body>
     
-    <header class="d-flex justify-content-end align-items-center p-3">
+    <header class="d-flex justify-content-end align-items-center p-2">
         <div class="share-btn rounded-circle d-flex justify-content-center align-items-center" style="height: 40px; width: 40px;" onclick="shareSite()">
             <i class="bi bi-box-arrow-up fs-4"></i>
         </div>
     </header>
     
-    <div id="formAlert" class="alert alert-success text-center z-3 d-none" role="alert">
-        Sent successfully!
-    </div>
-
+    
     <div class="container d-flex flex-column align-items-center justify-content-center mt-1">
+
+        <div id="formAlert" class="alert alert-success text-center" role="alert">
+            Sent successfully!
+        </div>
         <div class="image-container mb-3">
             <img src="/img/pr.jpg" alt="Profile image" class="img-fluid rounded-circle" 
                 style="width: 100px; height: 100px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imageModal">
         </div>
-        <h1 class="mb-3">Neng phanath</h1>
+        <h1 class="mb-3 text-center">Neng phanath</h1>
         <div class="w-100">
             <a href="https://www.instagram.com/nath_twenty3/" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
                 <i class="bi bi-instagram fs-4 position-absolute start-0 ms-3"></i>
@@ -59,6 +60,13 @@
                     <i class="bi bi-link-45deg fs-5"></i>
                 </div>
             </a>
+            <a href="https://github.com/nathtwenty3" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
+                <i class="bi bi-github fs-4 position-absolute start-0 ms-3"></i>
+                <span class="mx-auto">GitHub</span>
+                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                    <i class="bi bi-link-45deg fs-5"></i>
+                </div>
+            </a>
         </div>
         <div class="icon-bar d-flex justify-content-center gap-4 mt-4">
             <a href="https://instagram.com/nath_twenty3" class="text-light fs-3">
@@ -72,6 +80,9 @@
             </a>
             <a href="https://youtube.com/@nath_twenty3" class="text-light fs-3">
                 <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://github.com/nathtwenty3" class="text-light fs-3">
+                <i class="bi bi-github"></i>
             </a>
         </div>
     </div>
@@ -125,15 +136,15 @@
                             <textarea class="form-control shadow-none" name="message"  rows="4" placeholder="Type your message here..."></textarea>
                         </div>
                     </div>
-                    <div class="mb-4 w-100">
+                    <div class="mb-3 w-100">
                         <div class="w-100 text-center">
                             <button type="submit" id="sendBtn" class="btn btn-outline-light">
                                 <span class="spinner d-none"></span>
-                                SEND
+                                Send
                             </button>
                         </div>
                     </div>
-                    <div id="formError" class="alert alert-danger text-center d-none" role="alert">
+                    <div id="formError" class="text-center mb-3 d-none text-danger" role="alert">
                         Network error. Please try again.
                     </div>
                 </form>
