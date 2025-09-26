@@ -1,4 +1,6 @@
-.share-btn:hover {
+
+.share-btn:hover,
+.share-btn:active {
   color: #ff64a7;
   background-color: rgba(255, 102, 168, 0.1) !important;
 }
@@ -47,15 +49,12 @@ a.tile:hover {
 }
 
 @media (hover: none) {
-  .share-btn:hover {
-    background-color: inherit !important;
-    color: inherit !important;
-  }
   .share-btn:active {
     color: #ff64a7 !important;
-    background: rgba(255, 102, 168, 0.1) !important
+    background-color: rgba(255, 102, 168, 0.1) !important;
   }
 }
+
 
 /* #formAlert {
   margin-bottom: 1rem;
@@ -69,6 +68,7 @@ a.tile:hover {
 
 #formAlert {
   position: fixed;
+  top: 10px;
   left: 50%;
   width: auto;
   border-radius: 8px;
@@ -79,6 +79,8 @@ a.tile:hover {
   transform: translateX(-50%);
 }
 
-
-
-
+.form-control.is-invalid,
+.form-control.is-valid {
+  border-color: inherit !important;
+  box-shadow: none !important;
+}

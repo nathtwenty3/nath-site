@@ -117,7 +117,37 @@ function shareSite() {
 //     }, 2000);
 // }
 
+// function setupValidation() {
+//     const form = document.getElementById('contactForm');
 
+//     form.querySelectorAll('.form-control').forEach(input => {
+//         const isRequired = input.hasAttribute('required');
+
+//         input.addEventListener('blur', () => {
+//             if (isRequired) {
+//                 if (!input.checkValidity()) {
+//                     input.classList.add('is-invalid');
+//                 } else {
+//                     input.classList.remove('is-invalid');
+//                     input.classList.add('is-valid');
+//                 }
+//             } else {
+//                 input.classList.remove('is-invalid', 'is-valid');
+//             }
+//         });
+
+//         input.addEventListener('input', () => {
+//             if (isRequired && input.checkValidity()) {
+//                 input.classList.remove('is-invalid');
+//                 input.classList.add('is-valid');
+//             } else if (isRequired) {
+//                 input.classList.remove('is-valid');
+//             } else {
+//                 input.classList.remove('is-invalid', 'is-valid');
+//             }
+//         });
+//     });
+// }
 
 function sendToTelegram() {
 
@@ -134,7 +164,26 @@ function sendToTelegram() {
     const message = document.querySelector('[name="message"]').value.trim();
     const now = new Date();
     const dateTime = now.toDateString();
+    
+    // // Add blur validation to each input
+    // form.querySelectorAll('.form-control').forEach(input => {
+    //     input.addEventListener('blur', () => {
+    //         if (!input.checkValidity()) {
+    //             input.classList.add('is-invalid');
+    //             input.classList.remove('is-valid');
+    //         } else {
+    //             input.classList.remove('is-invalid');
+    //             input.classList.add('is-valid');
+    //         }
+    //     });
+    // });
 
+    // // On submit, validate the whole form
+    // if (!form.checkValidity()) {
+    //     form.classList.add('was-validated');
+    //     return false; // Prevent submission
+    // }
+    
 
     let text = `📩 New Contact Submission:\n
     📅 Date: ${dateTime}\n
@@ -198,7 +247,6 @@ function sendToTelegram() {
             submitBtn.innerHTML = "SEND";
             // submitBtn.disabled = false;
             console.error("Fetch error:", err)});
-
 
     return false;
 }

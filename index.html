@@ -20,15 +20,16 @@
         </div>
     </header>
     
+    <div id="formAlert" class="alert alert-success text-center z-3 d-none" role="alert">
+        Sent successfully!
+    </div>
 
     <div class="container d-flex flex-column align-items-center justify-content-center mt-1">
         <div class="image-container mb-3">
             <img src="/img/pr.jpg" alt="Profile image" class="img-fluid rounded-circle" 
                 style="width: 100px; height: 100px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#imageModal">
         </div>
-
-        <h1 class="mb-4">Neng phanath</h1>
-
+        <h1 class="mb-3">Neng phanath</h1>
         <div class="w-100">
             <a href="https://www.instagram.com/nath_twenty3/" class="tile w-100 mb-3 d-flex align-items-center position-relative bg-body-tertiary text-white" style="height: 50px;">
                 <i class="bi bi-instagram fs-4 position-absolute start-0 ms-3"></i>
@@ -74,17 +75,14 @@
             </a>
         </div>
     </div>
-    <div id="formAlert" class="alert alert-success text-center mt-3 z-3 d-none" role="alert">
-        Sent successfully!
-    </div>
+    
 
     <!-- Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-light">
                 <div class="modal-header border-0">
-                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
                     <img src="/img/pr.jpg" alt="Detailed profile" class="img-fluid rounded" style="max-height: 300px;">
@@ -110,9 +108,8 @@
                     <h2 class="text-center">Contact me</h2>
                     <button type="button" class="btn-close shadow-none position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
                 <!-- <form id="contactForm" action="https://formspree.io/f/xgvljbzy" method="POST"> -->
-                <form id="contactForm" onsubmit="return sendToTelegram();" class="needs-validation" novalidate>
+                <form id="contactForm" onsubmit="return sendToTelegram();" class="needs-validation optional"  >
                     <div class="modal-body mt-2">
                         <div class="mb-4">
                             <input type="text" name="name" class="form-control shadow-none"  placeholder="Your name">
