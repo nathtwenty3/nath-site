@@ -114,9 +114,9 @@ a.tile:hover {
     background-color: inherit !important;
     color: inherit !important;
   }
-  a.tile:hover {
+  /* a.tile:hover {
   background-color: initial !important;
-  }
+  } */
   a.tile:active{
     background-color: #ff64a7 !important;
   }
