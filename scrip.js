@@ -1,4 +1,13 @@
 
+// your name 
+var typed = new Typed('.your-name', {
+    strings: ['@Neng Phanath.'],
+    typeSpeed: 70,
+    backSpeed: 70,
+    loop: true
+});
+
+
 function copyHref(el) {
     event.stopPropagation();
     event.preventDefault();
@@ -166,26 +175,12 @@ function sendToTelegram() {
     const now = new Date();
     const dateTime = now.toDateString();
     
-    // // Add blur validation to each input
-    // form.querySelectorAll('.form-control').forEach(input => {
-    //     input.addEventListener('blur', () => {
-    //         if (!input.checkValidity()) {
-    //             input.classList.add('is-invalid');
-    //             input.classList.remove('is-valid');
-    //         } else {
-    //             input.classList.remove('is-invalid');
-    //             input.classList.add('is-valid');
-    //         }
-    //     });
-    // });
-
-    // // On submit, validate the whole form
-    // if (!form.checkValidity()) {
-    //     form.classList.add('was-validated');
-    //     return false; // Prevent submission
-    // }
+    //validate the whole form
+    if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        return false; // Prevent submission
+    }
     
-
     let text = `📩 New Contact Submission:\n
     📅 Date: ${dateTime}\n
     👤 Name: ${name}\n
@@ -339,4 +334,26 @@ function sendToTelegram() {
 //     return false;
 // }
 
+const profileCard = document.getElementById('profileCard');
 
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      profileCard.classList.add('animate');
+      observer.unobserve(profileCard);
+    }
+  });
+});
+
+observer.observe(profileCard);
+
+
+
+
+//--- for test ----
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const modalEl = document.getElementById('contactModal');
+//     const modal = new bootstrap.Modal(modalEl);
+//     modal.show();
+// });
