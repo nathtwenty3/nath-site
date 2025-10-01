@@ -1,7 +1,9 @@
-/* body{
-  background-image:url("img/bg-k.jpg");
-  background-size: cover;
-} */
+body{
+  background: linear-gradient(135deg, rgb(0, 45, 87), rgba(0, 11, 24));
+  /* background: linear-gradient(135deg, rgba(66, 32, 53, 0.98), rgb(0, 23, 45)); */
+  /* background-image:url(img/bg.jpg);
+  background-size: cover; */
+}
 .share-btn:hover,
 .share-btn:active {
   color: #ff64a7;
@@ -9,30 +11,37 @@
 }
 
 a.tile:hover {
-  background-color: rgba(255, 102, 168) !important;
+  background-color: rgb(255, 102, 168) !important;
+  border: 1px solid rgba(255, 102, 168, 0.3);
   transform: scale(1.01);
-  box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
+  box-shadow: 0 3px 17px rgba(255, 94, 164, 0.5);
   transition: cubic-bezier(0.07, 1.41, 0.82, 1.41) 0.2s;
 }
 .tile {
   text-decoration: none;
   border-radius: 10px;
+  border: 1px solid rgba(204, 204, 204, 0.2);
+  background-color: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.1s ease-in-out;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, 0.2);
 }
 
 .image-container{
   opacity: 0;
-  border-radius: 50%;
   transform: translateY(20px);
   animation: fadeInUp 0.8s ease-out forwards;
   transition: box-shadow 0.3s ease;
-  box-shadow: 0 4px 17px rgba(255, 94, 164, 0.1);
+  box-shadow: 0 0 12px rgba(255, 100, 167, 0.2);
 }
 .image-container img {
-  box-shadow: 0 0 12px rgba(255, 100, 167, 0.3);
+  border: 1px solid rgba(255, 102, 168, 0.3);
   transition: all 0.2s ease-in-out;
 }
 .image-container img:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 17px rgba(255, 100, 167, 0.2);
 }
 
 @keyframes fadeInUp {
@@ -41,71 +50,22 @@ a.tile:hover {
     transform: translateY(0);
   }
 }
-
 .profile-card.animate {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-
-.icon-bar a:hover {
-  transform: scale(1.1);
-  transition: all 0.3s ease-in-out;
+.icon-bar{
+  text-shadow: 0 2px 12px rgba(255, 255, 255,0.5);
+}
+.icon-bar a:hover{
+  transform: scale(1.2);
+  transition: all 0.2s ease-in-out;
   color: rgb(255, 100, 167) !important;
 }
 .icon-bar i:hover{
-  text-shadow: 0 4px 17px rgba(255, 100, 167, 0.5)
+  text-shadow: 0 0 12px rgba(255, 100, 167, 0.2);
 }
 
-/* .icon-bar i {
-  color: #fff;
-  text-shadow: 0 4px 12px rgba(255, 255, 255, 0.9);
-  transition: all 0.3s ease-in-out;
-}
-
-.icon-bar i:hover {
-  text-shadow: 0 4px 12px rgba(255, 255, 255, 0.9);
-  transform: scale(1.2);
-} */
-
-
-.contact-btn:hover {
-  background-color: rgba(255, 102, 168, 0.2);
-  color: #ff64a7;
-  transform: scale(1.1);
-  transition: all 0.2s ease-in-out;
-}
-.modal-content input,
-.modal-content textarea {
-  border: none;
-  border-bottom: 1px solid #ccc;
-  border-radius: 0;
-  background-color: transparent;
-  color: #fff;
-}
-
-.modal-content input:focus,
-.modal-content textarea:focus {
-  border-bottom: 1px solid rgba(255, 100, 167, 0.7);
-  outline: none;
-  box-shadow: none;
-}
-.submit-btn {
-  padding: 0.4rem 1.2rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 102, 168, 0.4);
-  background-color: rgba(255, 102, 168, 0.1);
-  color: #ff64a7;
-  transition: all 0.2s ease-in-out;
-}
-.submit-btn:hover {
-  background-color: rgba(255, 102, 168, 0.2);
-  transform: scale(1.02);
-  box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
-}
-.submit-btn:active {
-  transform: scale(0.98);
-  background-color: rgba(255, 102, 168, 0.3);
-}
 
 
 /* Mobile */
@@ -114,14 +74,20 @@ a.tile:hover {
     background-color: inherit !important;
     color: inherit !important;
   }
-  /* a.tile:hover {
-  background-color: initial !important;
-  } */
   a.tile:active{
     background-color: #ff64a7 !important;
   }
 }
 
+/* @media (width: 600px) {
+  .contact-form{
+    bottom: 20px;
+    right: 10px;
+    width: calc(100vw - 20px); 
+    min-width: 200px;
+    max-width: 400px;
+  }
+} */
 
 #formAlert {
   max-width: fit-content;
@@ -140,3 +106,212 @@ a.tile:hover {
 .was-validated .form-control:valid:focus {
   border-color: #ff64a7 !important; 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contact-btn{
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: rgb(255, 100, 167);
+  border: 1px solid rgba(255, 102, 168, 0.2);
+  background-color: rgba(255, 102, 168, 0.2);
+  backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 12px 32px rgba(119, 28, 67, 0.4);
+}
+.contact-form.active .contact-btn{
+  opacity: 0;
+  transform: scale(0.3);
+  pointer-events: none;
+}
+
+
+.submit-btn {
+  padding: 0.4rem 1.2rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 102, 168, 0.4);
+  background-color: rgba(255, 102, 168, 0.1);
+  color: rgb(255, 100, 167);
+  transition: all 0.2s ease-in-out;
+}
+.submit-btn:hover {
+  background-color: rgba(255, 102, 168, 0.2);
+  transform: scale(1.02);
+  box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
+}
+.submit-btn:active {
+  transform: scale(0.98);
+  background-color: rgba(255, 102, 168, 0.3);
+}
+
+ 
+.contact-float {
+  position: fixed;
+  bottom: 30px;
+  right: 10px;
+  z-index: 999;
+}
+/* .contact-form {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  width: calc(100vw - 20px); 
+  min-width: 200px;
+  max-width: 400px;
+  padding: 1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(45, 55, 72, 0.98), rgba(26, 32, 44, 0.98));
+  background: linear-gradient(135deg, rgba(94, 54, 76, 0.98), rgba(39, 23, 31, 0.98));
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid #ff64a7;
+  opacity: 0;
+  transform: scale(0.3);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+  pointer-events: none;
+  transition: all 0.5s ease;
+} */
+.contact-form {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(45, 55, 72, 0.5), rgba(26, 32, 44,0.5));
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%) contrast(100%);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.5);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-form.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  pointer-events: auto;
+  width: min(420px, calc(100vw - 60px));
+  height: auto;
+  border-radius: 20px;
+}
+
+#contactToggle.hide {
+  opacity: 0;
+  transform: scale(0.3);
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+/* .contact-form {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  width: 400px;
+  padding: 1rem;
+  background-color: rgba(255, 100, 167, 0.01) !important;
+  backdrop-filter: blur(20px)!important;
+  -webkit-backdrop-filter: blur(20px) contrast(90%);
+  border: 1px solid rgba(255, 100, 167, 0.2) !important;
+  box-shadow: 0 3px 12px rgba(255, 100, 167, 0.2) !important;
+} */
+
+.contact-form input,
+.contact-form textarea{
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+
+  /* width: 100%;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  outline: none; */
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 100, 167, 0.7);
+  box-shadow: none;
+}
+
+.widget-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 998;
+}
+.widget-overlay.active{
+  opacity: 1;
+  visibility: visible;
+}
+
+.contact-btn::before {
+    filter: blur(2px);
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent 30%
+    );
+    animation: rotate 3s linear infinite;
+    opacity: 0.6;
+}
+
+  @keyframes rotate {
+    100% { transform: rotate(360deg); }
+  }

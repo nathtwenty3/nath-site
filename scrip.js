@@ -96,11 +96,6 @@ function shareSite() {
 // });
 
 
-
-
-
-
-
 // // Show success alert
 // alertBox.classList.remove('d-none');
 // alertBox.classList.add('show');
@@ -158,15 +153,15 @@ function shareSite() {
 //     });
 // }
 
+
+//------------------------------
 function sendToTelegram() {
 
-    const modalEl = document.getElementById('contactModal');
-    const form = document.getElementById('contactForm');
+    const form = document.getElementById('contactFormInner');
     const alertBox = document.getElementById('formAlert');
     const errorBox = document.getElementById('formError');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const modalInstance = bootstrap.Modal.getInstance(modalEl) 
-        || new bootstrap.Modal(modalEl);
+    const submitBtn = document.getElementById('submitBtn');
+    
 
     const name = document.querySelector('[name="name"]').value.trim();
     const email = document.querySelector('[name="email"]').value.trim();
@@ -186,16 +181,8 @@ function sendToTelegram() {
     👤 Name: ${name}\n
     📧 Email: ${email}\n
     📱 Phone: ${phone}\n
-    💬 Message: ${message}`;
+    Message:\n\t${message}`;
 
-    // let text = `📩 New Contact Submission:\n\n` +
-    //     `📅 Date: ${dateTime}\n` +
-    //     `👤 Name: ${name}\n` +
-    //     `📧 Email: ${email}\n` +
-    //     `📱 Phone: ${phone}`;
-    // if (message) {
-    //     text += `\n💬 Message: ${message}`;
-    // } 
     const telegramURL = `https://api.telegram.org/bot8325372659:AAHFDER6bz0-MbbhvaKRM7WiT3qZLS58Pyw/sendMessage`;
     const chatID = `-1003062617687`; // Group chat ID
     // const chatID = 999999999;
@@ -223,7 +210,7 @@ function sendToTelegram() {
                 
                 form.reset();
                 form.classList.remove('was-validated');
-                modalInstance.hide();
+                hideForm();
 
                 submitBtn.innerHTML = "Send";
                 setTimeout(() => {
@@ -245,7 +232,7 @@ function sendToTelegram() {
 
     return false;
 }
-
+//------------------------------
 
 // function sendToTelegram() {
 
@@ -334,26 +321,116 @@ function sendToTelegram() {
 //     return false;
 // }
 
-const profileCard = document.getElementById('profileCard');
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      profileCard.classList.add('animate');
-      observer.unobserve(profileCard);
-    }
-  });
+const toggleBtn = document.getElementById('contactToggle');
+const form = document.getElementById('contactForm');
+const contactFloat = document.getElementById('contactFloat');
+const closeBtn = document.getElementById('closeBtn');
+const overlay = document.getElementById('overlay');
+const inputs = form.querySelectorAll('input, textarea');
+
+
+let isButtonHovering = false;
+let isFormHovering = false;
+let hideTimer = null;
+
+inputs.forEach(input => {
+    input.addEventListener('focus', () => {
+        isInputFocused = true;
+    });
+
+    input.addEventListener('blur', () => {
+        setTimeout(() => {
+            isInputFocused = false;
+        }, 300);
+    });
 });
 
-observer.observe(profileCard);
+
+function showForm() {
+    if (hideTimer) {
+        clearTimeout(hideTimer);
+        hideTimer = null;
+    }
+    form.classList.add('show');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    toggleBtn.classList.add('hide');
+}
+
+function hideForm() {
+    form.classList.remove('show');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    toggleBtn.classList.remove('hide');
+}
+
+function scheduleHide() {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+        if (!isButtonHovering && !isFormHovering && !isInputFocused) hideForm();
+    }, 300);
+}
+
+// Manual close
+closeBtn.addEventListener('click', hideForm);
+overlay.addEventListener('click', hideForm);
+
+toggleBtn.addEventListener('click', showForm);
+
+toggleBtn.addEventListener('mouseenter', () => {
+    isButtonHovering = true;
+    showForm();
+});
+
+toggleBtn.addEventListener('mouseleave', () => {
+    isButtonHovering = false;
+    scheduleHide();
+});
+
+form.addEventListener('mouseenter', () => {
+    isFormHovering = true;
+    showForm();
+});
+
+form.addEventListener('mouseleave', () => {
+    isFormHovering = false;
+    scheduleHide();
+});
 
 
+const submitBtn = document.getElementById('submitBtn');
+const nameInput = document.getElementById('nameInput');
+const emailInput = document.getElementById('emailInput');
+const phoneInput = document.getElementById('phoneInput');
+const messageInput = document.getElementById('messageInput');
 
 
-//--- for test ----
+submitBtn.addEventListener('click', () => {
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const modalEl = document.getElementById('contactModal');
-//     const modal = new bootstrap.Modal(modalEl);
-//     modal.show();
-// });
+    event.preventDefault();
+    sendToTelegram();
+    if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
+        // Shake animation for empty fields
+        [nameInput, emailInput, phoneInput, messageInput].forEach(input => {
+            if (!input.value.trim()) {
+                input.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    input.style.animation = '';
+                }, 500);
+            }
+        });
+        return;
+    }
+
+});
+
+const style = document.createElement('style');
+style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-8px); }
+                75% { transform: translateX(8px); }
+            }
+        `;
+document.head.appendChild(style);
