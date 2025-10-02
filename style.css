@@ -24,6 +24,7 @@ a.tile:hover {
   transition: cubic-bezier(0.07, 1.41, 0.82, 1.41) 0.2s;
 }
 .tile {
+  height: 60px;
   text-decoration: none;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2);
