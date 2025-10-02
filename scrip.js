@@ -466,14 +466,23 @@ const closeProfileBtn = modal.querySelector(".close-profile");
 
 profileCard.addEventListener("click", () => {
     modal.style.display = "flex";
+    toggleBtn.classList.add('hide');
     overlay.classList.add('active');
 });
+
 closeProfileBtn.addEventListener("click", () => {
     modal.style.display = "none";
+    toggleBtn.classList.remove('hide');
     overlay.classList.remove('active');
 });
 
 window.addEventListener("click", (e) => {
-    if (e.target === modal) 
-    closeProfileBtn.click();
+    if (e.target === modal)
+        closeProfileBtn.click();
 });
+
+// overlay.addEventListener("click", () => {
+//     if (modal.style.display === "flex") {
+//         closeProfileBtn.click();
+//     }
+// });
