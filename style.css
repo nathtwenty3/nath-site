@@ -45,7 +45,7 @@ a.tile:hover {
 }
 .image-container img {
   border: 1px solid rgba(255, 102, 168, 0.3);
-  border-radius: 50%;
+  /* border-radius: 50%; */
   transition: all 0.2s ease-in-out;
 }
 .image-container img:hover {
@@ -64,7 +64,7 @@ a.tile:hover {
 }
 
 /* Modal container */
-.profile-modal {
+/* .profile-modal {
   display:none;
   position: fixed;
   z-index: 999;
@@ -78,6 +78,28 @@ a.tile:hover {
   max-width: 90%;
   box-shadow: 0 8px 17px rgba(0, 0, 0, 0.5);
   animation: zoomIn 0.2s ease;
+} */
+
+
+.profile-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  /* background: rgba(0,0,0,0.3); */
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Enlarged image */
+.profile-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, 0.5);
+  transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 @keyframes zoomIn {
