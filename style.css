@@ -4,24 +4,31 @@ body{
   /* background-image:url(img/bg.jpg);
   background-size: cover; */
 }
+
 .share-btn:hover,
 .share-btn:active {
-  color: #ff64a7;
-  background-color: rgba(255, 102, 168, 0.1) !important;
+  color: rgb(255, 100, 167);
+  background-color: rgb(255, 100, 167, 0.2);
+  /* background-color: rgba(204, 204, 204, 0.1) !important; */
 }
+.your-name{
+  text-shadow: 0 0 17px rgb(0, 170, 255);
+}
+
 
 a.tile:hover {
   background-color: rgb(255, 102, 168) !important;
   border: 1px solid rgba(255, 102, 168, 0.3);
   transform: scale(1.01);
-  box-shadow: 0 3px 17px rgba(255, 94, 164, 0.5);
+  box-shadow: 0 3px 20px rgba(255, 94, 164, 0.7);
   transition: cubic-bezier(0.07, 1.41, 0.82, 1.41) 0.2s;
 }
 .tile {
   text-decoration: none;
   border-radius: 10px;
   border: 1px solid rgba(204, 204, 204, 0.2);
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0.02);
+  /* background-color: rgba(255, 102, 168, 0.1); */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.1s ease-in-out;
@@ -37,6 +44,7 @@ a.tile:hover {
 }
 .image-container img {
   border: 1px solid rgba(255, 102, 168, 0.3);
+  border-radius: 50%;
   transition: all 0.2s ease-in-out;
 }
 .image-container img:hover {
@@ -74,20 +82,14 @@ a.tile:hover {
     background-color: inherit !important;
     color: inherit !important;
   }
+  a.tile:hover{
+    background-color: inherit !important;
+  }
   a.tile:active{
     background-color: #ff64a7 !important;
   }
 }
 
-/* @media (width: 600px) {
-  .contact-form{
-    bottom: 20px;
-    right: 10px;
-    width: calc(100vw - 20px); 
-    min-width: 200px;
-    max-width: 400px;
-  }
-} */
 
 #formAlert {
   max-width: fit-content;
@@ -106,30 +108,6 @@ a.tile:hover {
 .was-validated .form-control:valid:focus {
   border-color: #ff64a7 !important; 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -152,6 +130,34 @@ a.tile:hover {
 }
 
 
+
+.submit-btn.sent {
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  background-color: rgba(34, 197, 94, 0.3) !important;
+  color: rgb(34, 197, 94);
+  transform: scale(1.05);
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.submit-btn .btn-icon {
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.submit-btn.sent .btn-icon {
+  animation: rotateSmooth 0.8s ease-out;
+}
+
+@keyframes rotateSmooth {
+  0%   { transform: rotate(0deg) scale(1); }
+  40%  { transform: rotate(180deg) scale(1.2); }
+  70%  { transform: rotate(270deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+
+
+
 .submit-btn {
   padding: 0.4rem 1.2rem;
   border-radius: 6px;
@@ -160,6 +166,7 @@ a.tile:hover {
   color: rgb(255, 100, 167);
   transition: all 0.2s ease-in-out;
 }
+
 .submit-btn:hover {
   background-color: rgba(255, 102, 168, 0.2);
   transform: scale(1.02);
@@ -212,7 +219,8 @@ a.tile:hover {
   opacity: 0;
   visibility: hidden;
   transform: scale(0.5);
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); */
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);

@@ -1,7 +1,7 @@
 
 // your name 
 var typed = new Typed('.your-name', {
-    strings: ['@Neng Phanath.'],
+    strings: ['Neng Phanath.'],
     typeSpeed: 70,
     backSpeed: 70,
     loop: true
@@ -158,30 +158,26 @@ function shareSite() {
 function sendToTelegram() {
 
     const form = document.getElementById('contactFormInner');
-    const alertBox = document.getElementById('formAlert');
     const errorBox = document.getElementById('formError');
     const submitBtn = document.getElementById('submitBtn');
-    
 
     const name = document.querySelector('[name="name"]').value.trim();
     const email = document.querySelector('[name="email"]').value.trim();
-    const phone = document.querySelector('[name="phone"]').value.trim();
     const message = document.querySelector('[name="message"]').value.trim();
     const now = new Date();
     const dateTime = now.toDateString();
-    
-    //validate the whole form
+
+    //validate form
     if (!form.checkValidity()) {
         form.classList.add('was-validated');
-        return false; // Prevent submission
+        return false;
     }
-    
+
     let text = `📩 New Contact Submission:\n
     📅 Date: ${dateTime}\n
     👤 Name: ${name}\n
     📧 Email: ${email}\n
-    📱 Phone: ${phone}\n
-    Message:\n\t${message}`;
+    Message:\t\t${message}\n`;
 
     const telegramURL = `https://api.telegram.org/bot8325372659:AAHFDER6bz0-MbbhvaKRM7WiT3qZLS58Pyw/sendMessage`;
     const chatID = `-1003062617687`; // Group chat ID
@@ -189,7 +185,7 @@ function sendToTelegram() {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-    
+
     submitBtn.disabled = true;
     submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...`;
     fetch(telegramURL, {
@@ -205,18 +201,25 @@ function sendToTelegram() {
         .then(response => response.json())
         .then(data => {
             if (data.ok) {
-                alertBox.classList.remove('d-none');
-                alertBox.classList.add('show');
-                
                 form.reset();
                 form.classList.remove('was-validated');
-                hideForm();
+                // hideForm();
 
-                submitBtn.innerHTML = "Send";
+                submitBtn.classList.add('sent');
+                // submitBtn.innerHTML = `<i class="bi bi-check2-all me-2"></i> Sent!`;
+                submitBtn.innerHTML = `
+                    <span class="btn-icon"><i class="bi bi-check2-all"></i></span>
+                    <span class="btn-text">Sent!</span>`;
                 setTimeout(() => {
-                    alertBox.classList.add('d-none');
+                    hideForm();
+
                     submitBtn.disabled = false;
-                }, 4000);
+                    submitBtn.classList.remove('sent');
+                    submitBtn.innerHTML = "Send";
+
+                    errorBox.classList.remove('show');
+                    errorBox.classList.add('d-none');
+                }, 3000);
             } else {
                 console.error("Telegram API error:", data.description);
             }
@@ -228,7 +231,8 @@ function sendToTelegram() {
 
             submitBtn.innerHTML = "Send";
             submitBtn.disabled = false;
-            console.error("Fetch error:", err)});
+            console.error("Fetch error:", err)
+        });
 
     return false;
 }
@@ -266,7 +270,7 @@ function sendToTelegram() {
 //     const chatID = `-1003062617687`; // Group chat ID
 //     // const chatID = 999999999;
 
-    
+
 
 //     // submitBtn.disabled = true;
 //     // submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...`;
@@ -291,7 +295,7 @@ function sendToTelegram() {
 //             if (data.ok) {
 //                 alertBox.classList.remove('d-none');
 //                 alertBox.classList.add('show');
-                
+
 //                 form.reset();
 //                 // form.classList.remove('was-validated');
 //                 // modalInstance.hide();
@@ -329,7 +333,7 @@ const closeBtn = document.getElementById('closeBtn');
 const overlay = document.getElementById('overlay');
 const inputs = form.querySelectorAll('input, textarea');
 
-
+let isInputFocused = false;
 let isButtonHovering = false;
 let isFormHovering = false;
 let hideTimer = null;
@@ -344,18 +348,36 @@ inputs.forEach(input => {
             isInputFocused = false;
         }, 300);
     });
-});
 
+    input.addEventListener('input', () => {
+        isInputFocused = true;
+        clearTimeout(hideTimer); // prevent premature hide
+    });
+
+    input.addEventListener('change', () => {
+        isInputFocused = true;
+        clearTimeout(hideTimer);
+    });
+
+});
+// let isAnimating = false;
 
 function showForm() {
     if (hideTimer) {
         clearTimeout(hideTimer);
         hideTimer = null;
     }
+    // if (isAnimating) return;
+    // isAnimating = true;
+
     form.classList.add('show');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
     toggleBtn.classList.add('hide');
+
+    // setTimeout(() => {
+    //     isAnimating = false;
+    // }, 300);
 }
 
 function hideForm() {
@@ -377,6 +399,7 @@ closeBtn.addEventListener('click', hideForm);
 overlay.addEventListener('click', hideForm);
 
 toggleBtn.addEventListener('click', showForm);
+toggleBtn.addEventListener('touchstart', showForm);
 
 toggleBtn.addEventListener('mouseenter', () => {
     isButtonHovering = true;
@@ -387,6 +410,7 @@ toggleBtn.addEventListener('mouseleave', () => {
     isButtonHovering = false;
     scheduleHide();
 });
+
 
 form.addEventListener('mouseenter', () => {
     isFormHovering = true;
@@ -402,7 +426,6 @@ form.addEventListener('mouseleave', () => {
 const submitBtn = document.getElementById('submitBtn');
 const nameInput = document.getElementById('nameInput');
 const emailInput = document.getElementById('emailInput');
-const phoneInput = document.getElementById('phoneInput');
 const messageInput = document.getElementById('messageInput');
 
 
@@ -412,7 +435,7 @@ submitBtn.addEventListener('click', () => {
     sendToTelegram();
     if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
         // Shake animation for empty fields
-        [nameInput, emailInput, phoneInput, messageInput].forEach(input => {
+        [nameInput, emailInput, messageInput].forEach(input => {
             if (!input.value.trim()) {
                 input.style.animation = 'shake 0.5s ease';
                 setTimeout(() => {
@@ -432,5 +455,5 @@ style.textContent = `
                 25% { transform: translateX(-8px); }
                 75% { transform: translateX(8px); }
             }
-        `;
+`;
 document.head.appendChild(style);
