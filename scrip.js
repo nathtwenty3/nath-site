@@ -428,7 +428,6 @@ const nameInput = document.getElementById('nameInput');
 const emailInput = document.getElementById('emailInput');
 const messageInput = document.getElementById('messageInput');
 
-
 submitBtn.addEventListener('click', () => {
 
     event.preventDefault();
@@ -457,3 +456,24 @@ style.textContent = `
             }
 `;
 document.head.appendChild(style);
+
+
+
+const profileCard = document.getElementById("profileCard");
+const modal = document.getElementById("customModal");
+const closeProfileBtn = modal.querySelector(".close-profile");
+
+
+profileCard.addEventListener("click", () => {
+    modal.style.display = "flex";
+    overlay.classList.add('active');
+});
+closeProfileBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    overlay.classList.remove('active');
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === modal) 
+    closeProfileBtn.click();
+});
