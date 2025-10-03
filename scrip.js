@@ -489,9 +489,9 @@ window.addEventListener("click", (e) => {
 //     }
 // });
 
-window.addEventListener('DOMContentLoaded', () => {
-    modal.style.display = "flex";
-    toggleBtn.classList.add('hide');
-    overlay.classList.add('active');
-    overlay.classList.add('profile-active');
-});
+// window.addEventListener('DOMContentLoaded', () => {
+//     modal.style.display = "flex";
+//     toggleBtn.classList.add('hide');
+//     overlay.classList.add('active');
+//     overlay.classList.add('profile-active');
+// });
