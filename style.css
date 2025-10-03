@@ -46,7 +46,6 @@ a.tile:hover {
 }
 .image-container img {
   border: 1px solid rgba(255, 102, 168, 0.3);
-  /* border-radius: 50%; */
   transition: all 0.2s ease-in-out;
 }
 .image-container img:hover {
@@ -76,16 +75,14 @@ a.tile:hover {
 
 .profile-modal img {
   border-radius: 50px;
-  box-shadow: 0 8px 17px rgba(0, 0, 0, 0.5);
-  animation: zoomIn 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: zoomIn 0.2s ease-out forwards;
 }
-
 
 .profile-modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.1);
   z-index: 9999;
   justify-content: center;
   align-items: center;
@@ -97,11 +94,10 @@ a.tile:hover {
   to   { transform: scale(1); opacity: 1; }
 }
 
-.close-profile {
+.profile-modal .close-profile {
   position: absolute;
   top: 30px;
   right: 30px;
-  color: #ccc;
   cursor: pointer;
 }
 
@@ -118,7 +114,6 @@ a.tile:hover {
 }
 
 
-
 /* Mobile */
 @media (hover: none) {
   .share-btn:hover{
@@ -132,16 +127,6 @@ a.tile:hover {
     box-shadow: 0 8px 17px rgba(0, 0, 0, 0.2);
     transition: none;
   }
-}
-
-
-#formAlert {
-  max-width: fit-content;
-  border-radius: 8px;
-  background-color: rgba(255, 102, 168, 0.2);
-  color: #ff64a7;
-  border: 1px solid rgba(255, 102, 168, 0.4);
-  box-shadow: 0 4px 17px rgba(255, 94, 164, 0.2);
 }
 
 .form-control.is-valid,
@@ -333,7 +318,8 @@ a.tile:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  height: 100vh;
+  background: rgba(255, 255, 255,0);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
@@ -341,6 +327,11 @@ a.tile:hover {
   transition: all 0.3s ease;
   z-index: 998;
 }
+.widget-overlay.profile-active {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+
 .widget-overlay.active{
   opacity: 1;
   visibility: visible;

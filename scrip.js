@@ -468,12 +468,14 @@ profileCard.addEventListener("click", () => {
     modal.style.display = "flex";
     toggleBtn.classList.add('hide');
     overlay.classList.add('active');
+    overlay.classList.add('profile-active');
 });
 
 closeProfileBtn.addEventListener("click", () => {
     modal.style.display = "none";
     toggleBtn.classList.remove('hide');
     overlay.classList.remove('active');
+    overlay.classList.remove('profile-active');
 });
 
 window.addEventListener("click", (e) => {
@@ -486,3 +488,10 @@ window.addEventListener("click", (e) => {
 //         closeProfileBtn.click();
 //     }
 // });
+
+window.addEventListener('DOMContentLoaded', () => {
+    modal.style.display = "flex";
+    toggleBtn.classList.add('hide');
+    overlay.classList.add('active');
+    overlay.classList.add('profile-active');
+});
