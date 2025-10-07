@@ -316,8 +316,9 @@ a.tile:hover {
   z-index: 998;
 }
 .widget-overlay.profile-active {
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 }
 
 .widget-overlay.active{
