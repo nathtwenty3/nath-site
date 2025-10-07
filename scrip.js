@@ -469,6 +469,7 @@ profileCard.addEventListener("click", () => {
     toggleBtn.classList.add('hide');
     overlay.classList.add('active');
     overlay.classList.add('profile-active');
+    document.body.style.overflow = 'hidden';
 });
 
 closeProfileBtn.addEventListener("click", () => {
@@ -476,6 +477,7 @@ closeProfileBtn.addEventListener("click", () => {
     toggleBtn.classList.remove('hide');
     overlay.classList.remove('active');
     overlay.classList.remove('profile-active');
+    document.body.style.overflow = '';
 });
 
 window.addEventListener("click", (e) => {
