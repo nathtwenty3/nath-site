@@ -14,225 +14,163 @@
 </head>
 
 <body>
-
-    <header class="d-flex justify-content-end align-items-center p-3">
-        <div class="share-btn rounded-circle d-flex justify-content-center align-items-center"
-            style="height: 40px; width: 40px;" onclick="shareSite()">
-            <i class="bi bi-box-arrow-up fs-4"></i>
-        </div>
-    </header>
-
-    <div id="siteLoader" class="site-loader">
-        <div class="loader-icon"></div>
-    </div>
-
     
-    <div class="container d-flex flex-column align-items-center justify-content-center mt-1">
-
-        <div id="profileCard" class="image-container mb-3 rounded-circle"
-            style="width: 160px; height: 160px; cursor: pointer;">
-            <img class="img-fluid rounded-circle modal-img-animate" src="/img/pr.jpg" alt="Profile image">
+    <div id="siteLoader" class="site-loader">
+        <div class="loader-ring">
         </div>
-        <div id="customModal" class="profile-modal">
-            <span class="close-profile fw-light">&times;</span>
-            <img class="modal-img-animate rounded-circle" src="/img/pr.jpg" alt="Detailed profile" style="max-height: 360px;">
-        </div>
-
-        <!-- Profile Modal -->
-        <!-- <div id="customModal" class="profile-modal">
-            <span class="close-profile fw-light">&times;</span>
-            <img class="rounded-circle" src="/img/pr.jpg" alt="Detailed profile" style="max-height: 360px;">
-        </div> -->
-
-
-        <!-- Name can change in script.js -->
-        <h2 class="mb-5 text-center" style="font-weight: bold">
-            <span class="your-name">
-            </span>
-        </h2>
-
-        <!-- Links -->
-        <div class="w-100">
-            <a href="https://www.instagram.com/nath_twenty3/"
-                class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
-                <i class="bi bi-instagram fs-4 position-absolute start-0 ms-3"></i>
-                <span class="mx-auto">Instagram</span>
-                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y"
-                    onclick="copyHref(this)">
-                    <i class="bi bi-link-45deg fs-4"></i>
-                </div>
-            </a>
-            <a href="https://www.facebook.com/nath.twenty3/"
-                class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
-                <i class="bi bi-facebook fs-4 position-absolute start-0 ms-3"></i>
-                <span class="mx-auto">Facebook</span>
-                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y"
-                    onclick="copyHref(this)">
-                    <i class="bi bi-link-45deg fs-4"></i>
-                </div>
-            </a>
-            <a href="https://t.me/NENGPHANATH"
-                class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
-                <i class="bi bi-telegram fs-4 position-absolute start-0 ms-3"></i>
-                <span class="mx-auto">Telegram</span>
-                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y"
-                    onclick="copyHref(this)">
-                    <i class="bi bi-link-45deg fs-4"></i>
-                </div>
-            </a>
-            <a href="https://youtube.com/@nath_twenty3"
-                class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
-                <i class="bi bi-youtube fs-4 position-absolute start-0 ms-3"></i>
-                <span class="mx-auto">YouTube</span>
-                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y"
-                    onclick="copyHref(this)">
-                    <i class="bi bi-link-45deg fs-4"></i>
-                </div>
-            </a>
-            <a href="https://github.com/nathtwenty3"
-                class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
-                <i class="bi bi-github fs-4 position-absolute start-0 ms-3"></i>
-                <span class="mx-auto">GitHub</span>
-                <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y"
-                    onclick="copyHref(this)">
-                    <i class="bi bi-link-45deg fs-4"></i>
-                </div>
-            </a>
-        </div>
-        <div class="icon-bar d-flex justify-content-center gap-4 mt-4">
-            <a href="https://instagram.com/nath_twenty3" class="text-light fs-3">
-                <i class="bi bi-instagram"></i>
-            </a>
-            <a href="https://facebook.com/nath.twenty3" class="text-light fs-3">
-                <i class="bi bi-facebook"></i>
-            </a>
-            <a href="https://t.me/NENGPHANATH" class="text-light fs-3">
-                <i class="bi bi-telegram"></i>
-            </a>
-            <a href="https://youtube.com/@nath_twenty3" class="text-light fs-3">
-                <i class="bi bi-youtube"></i>
-            </a>
-            <a href="https://github.com/nathtwenty3" class="text-light fs-3">
-                <i class="bi bi-github"></i>
-            </a>
-        </div>
+        <span class="loader-text">Loading...</span>
     </div>
+    <div class="main-container">
+        <header class="d-flex justify-content-end align-items-center p-3">
+            <div class="share-btn rounded-circle d-flex justify-content-center align-items-center"
+                style="height: 40px; width: 40px;" onclick="shareSite()">
+                <i class="bi bi-box-arrow-up fs-4"></i>
+            </div>
+        </header>
 
-
-    <!-- Contact Btn -->
-    <!-- <div class="contact-me position-fixed bottom-0 end-0 p-3 z-3">
-        <div class="contact-btn fs-4 d-flex justify-content-center align-items-center rounded-circle" style="width: 50px; height: 50px;" data-bs-toggle="modal" data-bs-target="#contactModal">
-            <i class="bi bi-chat-right-dots"></i>
+        <div class="container d-flex flex-column align-items-center justify-content-center mt-1">
+        
+            <div id="profileCard" class="image-container mb-3 rounded-circle"
+                style="width: 160px; height: 160px; cursor: pointer;">
+                <img class="img-fluid rounded-circle modal-img-animate" src="/img/pr.jpg" alt="Profile image">
+            </div>
+            <div id="customModal" class="profile-modal">
+                <span class="close-profile fw-light">&times;</span>
+                <img class="modal-img-animate rounded-circle" src="/img/pr.jpg" alt="Detailed profile"
+                    style="max-height: 360px;">
+            </div>
+        
+            <!-- Profile Modal -->
+            <!-- <div id="customModal" class="profile-modal">
+                    <span class="close-profile fw-light">&times;</span>
+                    <img class="rounded-circle" src="/img/pr.jpg" alt="Detailed profile" style="max-height: 360px;">
+                </div> -->
+        
+        
+            <!-- Name can change in script.js -->
+            <h2 class="mb-5 text-center" style="font-weight: bold">
+                <span class="your-name">
+                </span>
+            </h2>
+        
+            <!-- Links -->
+            <div class="w-100">
+                <a href="https://www.instagram.com/nath_twenty3/"
+                    class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
+                    <i class="bi bi-instagram fs-4 position-absolute start-0 ms-3"></i>
+                    <span class="mx-auto">Instagram</span>
+                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                        <i class="bi bi-link-45deg fs-4"></i>
+                    </div>
+                </a>
+                <a href="https://www.facebook.com/nath.twenty3/"
+                    class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
+                    <i class="bi bi-facebook fs-4 position-absolute start-0 ms-3"></i>
+                    <span class="mx-auto">Facebook</span>
+                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                        <i class="bi bi-link-45deg fs-4"></i>
+                    </div>
+                </a>
+                <a href="https://t.me/NENGPHANATH"
+                    class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
+                    <i class="bi bi-telegram fs-4 position-absolute start-0 ms-3"></i>
+                    <span class="mx-auto">Telegram</span>
+                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                        <i class="bi bi-link-45deg fs-4"></i>
+                    </div>
+                </a>
+                <a href="https://youtube.com/@nath_twenty3"
+                    class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
+                    <i class="bi bi-youtube fs-4 position-absolute start-0 ms-3"></i>
+                    <span class="mx-auto">YouTube</span>
+                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                        <i class="bi bi-link-45deg fs-4"></i>
+                    </div>
+                </a>
+                <a href="https://github.com/nathtwenty3"
+                    class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
+                    <i class="bi bi-github fs-4 position-absolute start-0 ms-3"></i>
+                    <span class="mx-auto">GitHub</span>
+                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
+                        <i class="bi bi-link-45deg fs-4"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="icon-bar d-flex justify-content-center gap-4 mt-4">
+                <a href="https://instagram.com/nath_twenty3" class="text-light fs-3">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://facebook.com/nath.twenty3" class="text-light fs-3">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="https://t.me/NENGPHANATH" class="text-light fs-3">
+                    <i class="bi bi-telegram"></i>
+                </a>
+                <a href="https://youtube.com/@nath_twenty3" class="text-light fs-3">
+                    <i class="bi bi-youtube"></i>
+                </a>
+                <a href="https://github.com/nathtwenty3" class="text-light fs-3">
+                    <i class="bi bi-github"></i>
+                </a>
+            </div>
         </div>
-    </div> -->
-    <!-- Contact -->
-    <!-- <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header d-block">
-                    <h2 class="text-center" style="font-family: monospace;">Contact me</h2>
-                    <button type="button" class="btn-close shadow-none position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="contactForm" action="https://formspree.io/f/xgvljbzy" method="POST">
-                <form id="contactForm" onsubmit="return sendToTelegram();" class="needs-validation optional" novalidate style="font-family: Source Sans 3;">
+        
+        <!-- -----------old------------ -->
+        <div class="widget-overlay" id="overlay"></div>
+        
+        <div class="contact-float" id="contactFloat">
+        
+            <div id="contactToggle" class="contact-btn fs-3 d-flex justify-content-center align-items-center rounded-circle"
+                style="width: 56px; height: 56px;">
+                <i class="bi bi-chat-right-dots"></i>
+            </div>
+        
+            <div class="contact-form" id="contactForm">
+                <h3 class="text-center mb-3 mt-2 " style="font-family:Arial, Helvetica, sans-serif">Contact me</h3>
+        
+                <button type="button" id="closeBtn" class="btn-close shadow-none position-absolute top-0 end-0 m-3"></button>
+                <form id="contactFormInner" class="needs-validation optional" novalidate style="font-family: Source Sans 3;">
+        
                     <div class="modal-body mt-2">
                         <div class="mb-4">
-                            <input type="text" name="name" class="form-control shadow-none"  placeholder="Your name">
+                            <input type="text" id="nameInput" name="name" class="form-control shadow-none"
+                                placeholder="Your name" required>
+                            <div class="invalid-feedback fs-6" style="font-family: 'Kantumruy Pro';">ដាក់ឈ្មោះផងលោក</div>
                         </div>
                         <div class="mb-4">
-                            <input type="email" name="email" class="form-control shadow-none" placeholder="E-mail" required>
+                            <input type="email" id="emailInput" name="email" class="form-control shadow-none"
+                                placeholder="E-mail" required>
                             <div class="invalid-feedback">Please enter your email dude.</div>
                         </div>
-                        <div class="mb-4">
-                            <input type="tel" name="phone" class="form-control shadow-none"  placeholder="Phone number">
-                        </div>
                         <div class="mb-2">
-                            <textarea class="form-control shadow-none" name="message"  rows="4" placeholder="Type your message here..."></textarea>
+                            <textarea class="form-control shadow-none" id="messageInput" name="message" rows="4"
+                                placeholder="Type your message here..." required></textarea>
+                            <div class="invalid-feedback fs-6" style="font-family: 'Kantumruy Pro';">អត់មានអីចង់និយាយទេមែន?
+                            </div>
                         </div>
                     </div>
-
-                    <div class="mb-3 w-100 d-flex justify-content-center">
-                        <button type="submit" id="sendBtn" class="submit-btn" role="button" tabindex="0">
+        
+                    <div class="mt-3 w-100 d-flex justify-content-center">
+                        <button type="submit" id="submitBtn" class="submit-btn" role="button">
                             <span class="spinner d-none"></span>
-                            Send
+                            <i class="bi bi-send-fill me-2"></i> Send
                         </button>
                     </div>
-                    
-                    <div id="formError" class="text-center mb-3 d-none text-danger" role="alert">
+        
+                    <div id="formError" class="text-center mt-3 d-none text-danger" role="alert">
                         <i class="bi bi-emoji-frown"></i>
-                        Network error.Please try again.
+                        Network error. Please try again.
                     </div>
                 </form>
             </div>
         </div>
-    </div> -->
-    <!-- -----------old------------ -->
-    <div class="widget-overlay" id="overlay"></div>
-
-    <div class="contact-float" id="contactFloat">
-
-        <div id="contactToggle" class="contact-btn fs-3 d-flex justify-content-center align-items-center rounded-circle"
-            style="width: 56px; height: 56px;">
-            <i class="bi bi-chat-right-dots"></i>
-        </div>
-
-        <div class="contact-form" id="contactForm">
-            <h3 class="text-center mb-3 mt-2 " style="font-family:Arial, Helvetica, sans-serif">Contact me</h3>
-
-            <button type="button" id="closeBtn" class="btn-close shadow-none position-absolute top-0 end-0 m-3"></button>
-            <form id="contactFormInner" class="needs-validation optional" novalidate
-                style="font-family: Source Sans 3;">
-
-                <div class="modal-body mt-2">
-                    <div class="mb-4">
-                        <input type="text" id="nameInput" name="name" class="form-control shadow-none"
-                            placeholder="Your name" required>
-                        <div class="invalid-feedback fs-6" style="font-family: 'Kantumruy Pro';">ដាក់ឈ្មោះផងលោក</div>
-                    </div>
-                    <div class="mb-4">
-                        <input type="email" id="emailInput" name="email" class="form-control shadow-none"
-                            placeholder="E-mail" required>
-                        <div class="invalid-feedback">Please enter your email dude.</div>
-                    </div>
-                    <div class="mb-2">
-                        <textarea class="form-control shadow-none" id="messageInput" name="message" rows="4"
-                            placeholder="Type your message here..." required></textarea>
-                        <div class="invalid-feedback fs-6" style="font-family: 'Kantumruy Pro';">អត់មានអីចង់និយាយទេមែន?
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-3 w-100 d-flex justify-content-center">
-                    <button type="submit" id="submitBtn" class="submit-btn" role="button">
-                        <span class="spinner d-none"></span>
-                        <i class="bi bi-send-fill me-2"></i> Send
-                    </button>
-                </div>
-
-                <div id="formError" class="text-center mt-3 d-none text-danger" role="alert">
-                    <i class="bi bi-emoji-frown"></i>
-                    Network error. Please try again.
-                </div>
-            </form>
-        </div>
+        
+        <footer>
+            <div class="text-center mt-5 mb-2 text-sm" style="font-size: smaller;">
+                © 2025 Neng Phanath Inc. All rights reserved.
+            </div>
+        </footer>
     </div>
-
-
-    <!-- <div class="debug-panel" id="debugPanel">
-        <div><strong>Mouse Leave Debug Panel</strong></div>
-        <div>Mouse Position: <span id="mousePos">-</span></div>
-        <div>Button Hover: <span id="btnHover">false</span></div>
-        <div>Form Hover: <span id="formHover">false</span></div>
-        <div>Form Visible: <span id="formVisible">false</span></div>
-        <div>Last Event: <span id="lastEvent">-</span></div>
-        <div>Timer Active: <span id="timerActive">false</span></div>
-    </div> -->
-
-    <footer>
-        <div class="text-center mt-5 mb-2 text-sm" style="font-size: smaller;">
-            © 2025 Neng Phanath Inc. All rights reserved.
-        </div>
-    </footer>
 
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="scrip.js"></script>

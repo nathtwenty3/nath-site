@@ -7,41 +7,26 @@ var typed = new Typed('.your-name', {
 });
 
 
+const startTime = performance.now();
 window.addEventListener('load', () => {
+    const endTime = performance.now();
+    const loadDuration = endTime - startTime;
     const loader = document.getElementById('siteLoader');
+
+    if (loadDuration > 3000) {
+        const loaderText = loader.querySelector('.loader-text');
+        if (loaderText) loaderText.textContent = "Slow connection detected...";
+    }
+
     loader.style.opacity = '1';
     document.body.style.overflow = 'hidden';
     setTimeout(() => {
         document.body.style.overflow = '';
         loader.style.display = 'none';
-    }, 100);
+        document.querySelector('.main-container').classList.add('page-loaded');
+    },700);
 });
-
-// const startTime = performance.now();
-
-// window.addEventListener('load', () => {
-//     const endTime = performance.now();
-//     const loadDuration = endTime - startTime;
-
-//     console.log(`Page loaded in ${Math.round(loadDuration)}ms`);
-
-//     // Optional: show a message based on speed
-//     if (loadDuration > 3000) {
-//         document.getElementById('siteLoader').innerHTML = "Slow connection detected...";
-//     }
-
-//     // Fade out loader
-//     const loader = document.getElementById('siteLoader');
-//     loader.style.opacity = '0';
-//     setTimeout(() => {
-//         loader.style.display = 'none';
-//     }, 500);
-// });
-
-
-
-
-
+//------------------------------
 
 function copyHref(el) {
     event.stopPropagation();
@@ -85,112 +70,6 @@ function shareSite() {
     }
 }
 
-// const form = document.getElementById('contactForm')
-// const alertBox = document.getElementById('formAlert');
-// const modalElement = document.getElementById('contactModal');
-// const submitBtn = form.querySelector('button[type="submit"]');
-
-// form.addEventListener('submit', function (e) {
-//     e.preventDefault(); // Stop default form submission
-
-//     submitBtn.disabled = true;
-//     submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...`;
-
-//     const formData = new FormData(form);
-//     const modalInstance = bootstrap.Modal.getInstance(modalElement);
-
-//     fetch(form.action, {
-//         method: 'POST',
-//         body: formData,
-//         headers: {
-//             'Accept': 'application/json'
-//         }
-//     }).then(response => {
-//         if (response.ok) {
-//             alertBox.classList.remove('d-none');
-//             alertBox.classList.add('show');
-//             form.reset();
-
-//             modalInstance.hide(); // Close modal
-//             submitBtn.innerHTML = "SEND";
-//             setTimeout(() => {
-//                 alertBox.classList.add('d-none'); // Hide alert
-//                 submitBtn.disabled = false;
-//             }, 4000);
-//         } else {
-//             alertBox.textContent = "Something went wrong. Please try again.";
-//             alertBox.classList.remove('d-none');
-//             submitBtn.disabled = false;
-//         }
-//     }).catch(() => {
-//         alertBox.textContent = "Network error. Please try again.";
-//         alertBox.classList.remove('d-none');
-//         submitBtn.disabled = false;
-//         submitBtn.innerHTML = "SEND MESSAGE";
-//     });
-// });
-
-
-// // Show success alert
-// alertBox.classList.remove('d-none');
-// alertBox.classList.add('show');
-
-// // Reset form
-// modalElement.querySelector('form').reset();
-
-// // Auto-close modal after 2 seconds
-// modalInstance.hide();
-// setTimeout(() => {
-//     alertBox.classList.add('d-none'); // Hide alert after closing
-// }, 2000);
-
-// return false;
-
-// function showTestAlert() {
-//     const alertBox = document.getElementById('formAlert');
-//     alertBox.classList.remove('d-none');
-//     alertBox.classList.add('show');
-
-//     setTimeout(() => {
-//         alertBox.classList.add('d-none');
-//     }, 2000);
-// }
-
-// function setupValidation() {
-//     const form = document.getElementById('contactForm');
-
-//     form.querySelectorAll('.form-control').forEach(input => {
-//         const isRequired = input.hasAttribute('required');
-
-//         input.addEventListener('blur', () => {
-//             if (isRequired) {
-//                 if (!input.checkValidity()) {
-//                     input.classList.add('is-invalid');
-//                 } else {
-//                     input.classList.remove('is-invalid');
-//                     input.classList.add('is-valid');
-//                 }
-//             } else {
-//                 input.classList.remove('is-invalid', 'is-valid');
-//             }
-//         });
-
-//         input.addEventListener('input', () => {
-//             if (isRequired && input.checkValidity()) {
-//                 input.classList.remove('is-invalid');
-//                 input.classList.add('is-valid');
-//             } else if (isRequired) {
-//                 input.classList.remove('is-valid');
-//             } else {
-//                 input.classList.remove('is-invalid', 'is-valid');
-//             }
-//         });
-//     });
-// }
-
-window.addEventListener('DOMContentLoaded', () => {
-    showForm();
-});
 //------------------------------
 function sendToTelegram() {
 
