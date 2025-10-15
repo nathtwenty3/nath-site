@@ -1,4 +1,3 @@
-
 // your name 
 var typed = new Typed('.your-name', {
     strings: ['Neng Phanath.'],
@@ -6,6 +5,42 @@ var typed = new Typed('.your-name', {
     backSpeed: 70,
     loop: true
 });
+
+
+window.addEventListener('load', () => {
+    const loader = document.getElementById('siteLoader');
+    loader.style.opacity = '1';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+        document.body.style.overflow = '';
+        loader.style.display = 'none';
+    }, 100);
+});
+
+// const startTime = performance.now();
+
+// window.addEventListener('load', () => {
+//     const endTime = performance.now();
+//     const loadDuration = endTime - startTime;
+
+//     console.log(`Page loaded in ${Math.round(loadDuration)}ms`);
+
+//     // Optional: show a message based on speed
+//     if (loadDuration > 3000) {
+//         document.getElementById('siteLoader').innerHTML = "Slow connection detected...";
+//     }
+
+//     // Fade out loader
+//     const loader = document.getElementById('siteLoader');
+//     loader.style.opacity = '0';
+//     setTimeout(() => {
+//         loader.style.display = 'none';
+//     }, 500);
+// });
+
+
+
+
 
 
 function copyHref(el) {
@@ -153,7 +188,9 @@ function shareSite() {
 //     });
 // }
 
-
+window.addEventListener('DOMContentLoaded', () => {
+    showForm();
+});
 //------------------------------
 function sendToTelegram() {
 
@@ -167,58 +204,50 @@ function sendToTelegram() {
     const now = new Date();
     const dateTime = now.toDateString();
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
     //validate form
     if (!form.checkValidity()) {
         form.classList.add('was-validated');
         return false;
     }
 
-    let text = `📩 New Contact Submission:\n
+    const text = `📩 New Contact Submission:\n
     📅 Date: ${dateTime}\n
     👤 Name: ${name}\n
     📧 Email: ${email}\n
     Message:\t\t${message}\n`;
 
-    const telegramURL = `https://api.telegram.org/bot8325372659:AAHFDER6bz0-MbbhvaKRM7WiT3qZLS58Pyw/sendMessage`;
-    const chatID = `-1003062617687`; // Group chat ID
-    // const chatID = 999999999;
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-
     submitBtn.disabled = true;
     submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...`;
-    fetch(telegramURL, {
+    
+    fetch (`/api/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: chatID,
-            text: text,
-            parse_mode: "Markdown"
+        body: JSON.stringify({ message: text 
         }),
         signal: controller.signal
     })
         .then(response => response.json())
         .then(data => {
-            if (data.ok) {
+            clearTimeout(timeoutId);    
+
+            if (data.success) {
                 form.reset();
                 form.classList.remove('was-validated');
-                // hideForm();
 
                 submitBtn.classList.add('sent');
-                // submitBtn.innerHTML = `<i class="bi bi-check2-all me-2"></i> Sent!`;
                 submitBtn.innerHTML = `
                     <span class="btn-icon"><i class="bi bi-check2-all"></i></span>
                     <span class="btn-text">Sent!</span>`;
                 setTimeout(() => {
-                    hideForm();
-
                     submitBtn.disabled = false;
                     submitBtn.classList.remove('sent');
                     submitBtn.innerHTML = "Send";
-
                     errorBox.classList.remove('show');
                     errorBox.classList.add('d-none');
+                    hideForm();
                 }, 3000);
             } else {
                 console.error("Telegram API error:", data.description);
@@ -228,18 +257,16 @@ function sendToTelegram() {
             clearTimeout(timeoutId);
             errorBox.classList.remove('d-none');
             errorBox.classList.add('show');
-
             submitBtn.innerHTML = "Send";
             submitBtn.disabled = false;
             console.error("Fetch error:", err)
         });
-
     return false;
 }
+
+
 //------------------------------
-
 // function sendToTelegram() {
-
 //     const modalEl = document.getElementById('contactModal');
 //     const form = document.getElementById('contactForm');
 //     const alertBox = document.getElementById('formAlert');
@@ -269,7 +296,6 @@ function sendToTelegram() {
 //     const telegramURL = `https://api.telegram.org/bot8325372659:AAHFDER6bz0-MbbhvaKRM7WiT3qZLS58Pyw/sendMessage`;
 //     const chatID = `-1003062617687`; // Group chat ID
 //     // const chatID = 999999999;
-
 
 
 //     // submitBtn.disabled = true;
@@ -320,8 +346,6 @@ function sendToTelegram() {
 //             // submitBtn.innerHTML = "SEND";
 //             // submitBtn.disabled = false;
 //             console.error("Fetch error:", err)});
-
-
 //     return false;
 // }
 
@@ -351,46 +375,40 @@ inputs.forEach(input => {
 
     input.addEventListener('input', () => {
         isInputFocused = true;
-        clearTimeout(hideTimer); // prevent premature hide
-    });
-
-    input.addEventListener('change', () => {
-        isInputFocused = true;
         clearTimeout(hideTimer);
     });
-
 });
-// let isAnimating = false;
 
 function showForm() {
     if (hideTimer) {
         clearTimeout(hideTimer);
         hideTimer = null;
     }
-    // if (isAnimating) return;
-    // isAnimating = true;
-
     form.classList.add('show');
     overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
     toggleBtn.classList.add('hide');
-
-    // setTimeout(() => {
-    //     isAnimating = false;
-    // }, 300);
+    form.dataset.justOpened = "true";
+    setTimeout(() => {
+        form.dataset.justOpened = "false";
+    }, 500);
 }
 
 function hideForm() {
     form.classList.remove('show');
     overlay.classList.remove('active');
-    document.body.style.overflow = '';
     toggleBtn.classList.remove('hide');
 }
 
 function scheduleHide() {
     clearTimeout(hideTimer);
     hideTimer = setTimeout(() => {
-        if (!isButtonHovering && !isFormHovering && !isInputFocused) hideForm();
+        const active = document.activeElement;
+        if (!isButtonHovering && !isFormHovering && 
+            !(active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) && 
+        form.dataset.justOpened !== "true") 
+        {
+            hideForm();
+        }
     }, 300);
 }
 
@@ -410,7 +428,6 @@ toggleBtn.addEventListener('mouseleave', () => {
     isButtonHovering = false;
     scheduleHide();
 });
-
 
 form.addEventListener('mouseenter', () => {
     isFormHovering = true;
@@ -463,7 +480,6 @@ const profileCard = document.getElementById("profileCard");
 const modal = document.getElementById("customModal");
 const closeProfileBtn = modal.querySelector(".close-profile");
 
-
 profileCard.addEventListener("click", () => {
     modal.style.display = "flex";
     toggleBtn.classList.add('hide');
@@ -485,15 +501,6 @@ window.addEventListener("click", (e) => {
         closeProfileBtn.click();
 });
 
-// overlay.addEventListener("click", () => {
-//     if (modal.style.display === "flex") {
-//         closeProfileBtn.click();
-//     }
-// });
-
 // window.addEventListener('DOMContentLoaded', () => {
-//     modal.style.display = "flex";
-//     toggleBtn.classList.add('hide');
-//     overlay.classList.add('active');
-//     overlay.classList.add('profile-active');
+//     profileCard.click();
 // });
