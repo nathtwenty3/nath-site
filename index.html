@@ -14,20 +14,20 @@
 </head>
 
 <body>
-    
     <div id="siteLoader" class="site-loader">
         <div class="loader-ring">
         </div>
         <span class="loader-text">Loading...</span>
     </div>
-    <div class="main-container">
+
+    <main class="main-container">
         <header class="d-flex justify-content-end align-items-center p-3">
             <div class="share-btn rounded-circle d-flex justify-content-center align-items-center"
                 style="height: 40px; width: 40px;" onclick="shareSite()">
                 <i class="bi bi-box-arrow-up fs-4"></i>
             </div>
         </header>
-
+        
         <div class="container d-flex flex-column align-items-center justify-content-center mt-1">
         
             <div id="profileCard" class="image-container mb-3 rounded-circle"
@@ -39,14 +39,6 @@
                 <img class="modal-img-animate rounded-circle" src="/img/pr.jpg" alt="Detailed profile"
                     style="max-height: 360px;">
             </div>
-        
-            <!-- Profile Modal -->
-            <!-- <div id="customModal" class="profile-modal">
-                    <span class="close-profile fw-light">&times;</span>
-                    <img class="rounded-circle" src="/img/pr.jpg" alt="Detailed profile" style="max-height: 360px;">
-                </div> -->
-        
-        
             <!-- Name can change in script.js -->
             <h2 class="mb-5 text-center" style="font-weight: bold">
                 <span class="your-name">
@@ -114,63 +106,62 @@
                 </a>
             </div>
         </div>
-        
-        <!-- -----------old------------ -->
         <div class="widget-overlay" id="overlay"></div>
-        
-        <div class="contact-float" id="contactFloat">
-        
-            <div id="contactToggle" class="contact-btn fs-3 d-flex justify-content-center align-items-center rounded-circle"
-                style="width: 56px; height: 56px;">
-                <i class="bi bi-chat-right-dots"></i>
-            </div>
-        
-            <div class="contact-form" id="contactForm">
-                <h3 class="text-center mb-3 mt-2 " style="font-family:Arial, Helvetica, sans-serif">Contact me</h3>
-        
-                <button type="button" id="closeBtn" class="btn-close shadow-none position-absolute top-0 end-0 m-3"></button>
-                <form id="contactFormInner" class="needs-validation optional" novalidate style="font-family: Source Sans 3;">
-        
-                    <div class="modal-body mt-2">
-                        <div class="mb-4">
-                            <input type="text" id="nameInput" name="name" class="form-control shadow-none"
-                                placeholder="Your name" required>
-                            <div class="invalid-feedback fs-6" style="font-family: 'Kantumruy Pro';">ដាក់ឈ្មោះផងលោក</div>
-                        </div>
-                        <div class="mb-4">
-                            <input type="email" id="emailInput" name="email" class="form-control shadow-none"
-                                placeholder="E-mail" required>
-                            <div class="invalid-feedback">Please enter your email dude.</div>
-                        </div>
-                        <div class="mb-2">
-                            <textarea class="form-control shadow-none" id="messageInput" name="message" rows="4"
-                                placeholder="Type your message here..." required></textarea>
-                            <div class="invalid-feedback fs-6" style="font-family: 'Kantumruy Pro';">អត់មានអីចង់និយាយទេមែន?
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="mt-3 w-100 d-flex justify-content-center">
-                        <button type="submit" id="submitBtn" class="submit-btn" role="button">
-                            <span class="spinner d-none"></span>
-                            <i class="bi bi-send-fill me-2"></i> Send
-                        </button>
-                    </div>
-        
-                    <div id="formError" class="text-center mt-3 d-none text-danger" role="alert">
-                        <i class="bi bi-emoji-frown"></i>
-                        Network error. Please try again.
-                    </div>
-                </form>
-            </div>
-        </div>
-        
         <footer>
             <div class="text-center mt-5 mb-2 text-sm" style="font-size: smaller;">
                 © 2025 Neng Phanath Inc. All rights reserved.
             </div>
         </footer>
+    </main>
+    
+    
+    <!------- Chat ----->
+    <div class="contact-float" id="contactFloat">
+        <div id="contactToggle" class="contact-btn fs-3 d-flex justify-content-center align-items-center rounded-circle"
+            style="width: 56px; height: 56px;">
+            <i class="bi bi-chat-dots"></i>
+        </div>
+        <div class="contact-form" id="contactForm">
+            <h3 class="text-center mb-3 mt-2 " style="font-family:Arial, Helvetica, sans-serif">Contact me</h3>
+            <button type="button" id="closeBtn" class="btn-close shadow-none position-absolute top-0 end-0 m-3"></button>
+            <form id="contactFormInner" class="needs-validation optional" novalidate style="font-family: Source Sans 3;">
+    
+                <div class="modal-body mt-2">
+                    <div class="mb-4">
+                        <input type="text" id="nameInput" name="name" class="form-control shadow-none"
+                            placeholder="Your name" required>
+                        <div class="invalid-feedback fs-6">Please enter your name</div>
+                    </div>
+                    <div class="mb-4">
+                        <input type="email" id="emailInput" name="email" class="form-control shadow-none"
+                            placeholder="E-mail" required>
+                        <div class="invalid-feedback">Please enter your email dude.</div>
+                    </div>
+                    <div class="mb-2">
+                        <textarea class="form-control shadow-none" id="messageInput" name="message" rows="4"
+                            placeholder="Type your message here..." required></textarea>
+                        <div class="invalid-feedback fs-6" style="font-family: 'Kantumruy Pro';">អត់មានអីចង់និយាយទេមែន?
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="mt-3 w-100 d-flex justify-content-center">
+                    <button type="submit" id="submitBtn" class="submit-btn" role="button">
+                        <span class="spinner d-none"></span>
+                        <i class="bi bi-send-fill me-2"></i> Send
+                    </button>
+                </div>
+                <div id="formError" class="text-center mt-3 d-none text-danger" role="alert">
+                    <i class="bi bi-emoji-frown"></i>
+                    Network error. Please try again.
+                </div>
+            </form>
+        </div>
     </div>
+    <!------- End Chat ----->
+    
+    
+
 
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="scrip.js"></script>

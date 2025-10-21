@@ -6,8 +6,8 @@ var typed = new Typed('.your-name', {
     loop: true
 });
 
-
 const startTime = performance.now();
+
 window.addEventListener('load', () => {
     const endTime = performance.now();
     const loadDuration = endTime - startTime;
@@ -20,14 +20,20 @@ window.addEventListener('load', () => {
 
     loader.style.opacity = '1';
     document.body.style.overflow = 'hidden';
+    loader.classList.add('fade-out');
+    
     setTimeout(() => {
         document.body.style.overflow = '';
         loader.style.display = 'none';
-        document.querySelector('.main-container').classList.add('page-loaded');
+        document.body.classList.add('loaded'); 
     },700);
 });
-//------------------------------
 
+
+
+
+
+//------------------------------
 function copyHref(el) {
     event.stopPropagation();
     event.preventDefault();
@@ -70,9 +76,12 @@ function shareSite() {
     }
 }
 
+
+
+
+
 //------------------------------
 function sendToTelegram() {
-
     const form = document.getElementById('contactFormInner');
     const errorBox = document.getElementById('formError');
     const submitBtn = document.getElementById('submitBtn');
@@ -89,7 +98,7 @@ function sendToTelegram() {
     //validate form
     if (!form.checkValidity()) {
         form.classList.add('was-validated');
-        return false;
+        return;
     }
 
     const text = `📩 New Contact Submission:\n
@@ -144,89 +153,6 @@ function sendToTelegram() {
 }
 
 
-//------------------------------
-// function sendToTelegram() {
-//     const modalEl = document.getElementById('contactModal');
-//     const form = document.getElementById('contactForm');
-//     const alertBox = document.getElementById('formAlert');
-
-//     const btn = document.getElementById('sendBtn');
-//     const spinner = btn.querySelector('.spinner');
-
-//     const modalInstance = bootstrap.Modal.getInstance(modalEl) 
-//         || new bootstrap.Modal(modalEl);
-
-
-//     const name = document.querySelector('[name="name"]').value.trim();
-//     const email = document.querySelector('[name="email"]').value.trim();
-//     const phone = document.querySelector('[name="phone"]').value.trim();
-//     const message = document.querySelector('[name="message"]').value.trim();
-//     const now = new Date();
-//     const dateTime = now.toDateString();
-
-
-//     let text = `📩 New Contact Submission:\n
-//     📅 Date: ${dateTime}\n
-//     👤 Name: ${name}\n
-//     📧 Email: ${email}\n
-//     📱 Phone: ${phone}\n
-//     💬 Message: ${message}`;
-
-//     const telegramURL = `https://api.telegram.org/bot8325372659:AAHFDER6bz0-MbbhvaKRM7WiT3qZLS58Pyw/sendMessage`;
-//     const chatID = `-1003062617687`; // Group chat ID
-//     // const chatID = 999999999;
-
-
-//     // submitBtn.disabled = true;
-//     // submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...`;
-//     const controller = new AbortController();
-//     const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-//     btn.classList.add('loading');
-//     spinner.classList.remove('d-none');
-
-//     fetch(telegramURL, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({
-//             chat_id: chatID,
-//             text: text,
-//             parse_mode: "Markdown"
-//         }),
-//         signal: controller.signal
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.ok) {
-//                 alertBox.classList.remove('d-none');
-//                 alertBox.classList.add('show');
-
-//                 form.reset();
-//                 // form.classList.remove('was-validated');
-//                 // modalInstance.hide();
-
-//                 // submitBtn.innerHTML = "SEND";
-//                 setTimeout(() => {
-//                     btn.classList.remove('loading');
-//                     spinner.classList.add('d-none');
-//                     document.getElementById('formAlert').classList.remove('d-none');
-//                     document.getElementById('formAlert').classList.add('show');
-//                 }, 4000);
-//             } else {
-//                 console.error("Telegram API error:", data.description);
-//             }
-//         })
-//         .catch(err => {
-//             const errorBox = document.getElementById('formError');
-//             clearTimeout(timeoutId);
-//             errorBox.classList.remove('d-none');
-//             errorBox.classList.add('show');
-
-//             // submitBtn.innerHTML = "SEND";
-//             // submitBtn.disabled = false;
-//             console.error("Fetch error:", err)});
-//     return false;
-// }
 
 
 const toggleBtn = document.getElementById('contactToggle');
@@ -324,9 +250,9 @@ const nameInput = document.getElementById('nameInput');
 const emailInput = document.getElementById('emailInput');
 const messageInput = document.getElementById('messageInput');
 
-submitBtn.addEventListener('click', () => {
+submitBtn.addEventListener('click', (e) => {
 
-    event.preventDefault();
+    e.preventDefault();
     sendToTelegram();
     if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
         // Shake animation for empty fields
