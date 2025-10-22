@@ -439,21 +439,6 @@ body.loaded .contact-float {
   }
 }
 
-/* ::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgb(0, 32, 71);
-  border-radius: 3px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-} */
-
-
-/* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -467,4 +452,13 @@ body.loaded .contact-float {
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0, 70, 136, 0.9);
+}
+.music-toggle:hover {
+  color: rgb(255, 100, 167);
+}
+
+.music-btn{
+  border: none;
+  color: white;
+  background: transparent;
 }

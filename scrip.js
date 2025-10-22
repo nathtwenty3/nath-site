@@ -315,12 +315,12 @@ const MtoggleBtn = document.getElementById('music-toggle');
 let isPlaying = false;
 
 MtoggleBtn.addEventListener('click', () => {
-    if (isPlaying) {
+    if (!isPlaying) {
         music.play();
-        MtoggleBtn.innerHTML = '<i class="bi bi-volume-up-fill fs-4"></i>';
+        MtoggleBtn.innerHTML = '<i class="bi bi-volume-up-fill fs-3"></i>';
     }else{
         music.pause();
-        MtoggleBtn.innerHTML = '<i class="bi bi-volume-mute-fill fs-4"></i>';
+        MtoggleBtn.innerHTML = '<i class="bi bi-volume-mute-fill fs-3"></i>';
     }
     isPlaying = !isPlaying;
 });
