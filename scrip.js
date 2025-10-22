@@ -309,3 +309,18 @@ window.addEventListener("click", (e) => {
 // window.addEventListener('DOMContentLoaded', () => {
 //     profileCard.click();
 // });
+
+const music = document.getElementById('bg-music');
+const MtoggleBtn = document.getElementById('music-toggle');
+let isPlaying = false;
+
+MtoggleBtn.addEventListener('click', () => {
+    if (isPlaying) {
+        music.play();
+        MtoggleBtn.innerHTML = '<i class="bi bi-volume-up-fill fs-4"></i>';
+    }else{
+        music.pause();
+        MtoggleBtn.innerHTML = '<i class="bi bi-volume-mute-fill fs-4"></i>';
+    }
+    isPlaying = !isPlaying;
+});
