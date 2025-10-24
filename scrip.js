@@ -21,12 +21,12 @@ window.addEventListener('load', () => {
     loader.style.opacity = '1';
     document.body.style.overflow = 'hidden';
     loader.classList.add('fade-out');
-    
+
     setTimeout(() => {
         document.body.style.overflow = '';
         loader.style.display = 'none';
-        document.body.classList.add('loaded'); 
-    },700);
+        document.body.classList.add('loaded');
+    }, 700);
 });
 
 
@@ -81,6 +81,32 @@ function shareSite() {
 
 
 //------------------------------
+const formInner = document.getElementById('contactFormInner');
+const nameInput = document.getElementById('nameInput');
+const emailInput = document.getElementById('emailInput');
+const messageInput = document.getElementById('messageInput');
+
+formInner.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!formInner.checkValidity()) {
+        // formInner.reportValidity();
+        formInner.classList.add('was-validated');
+
+
+        const invalids = formInner.querySelectorAll(':invalid');
+        invalids.forEach(input => {
+            input.style.animation = 'shake 0.5s ease';
+            setTimeout(() => {
+                input.style.animation = '';
+            }, 500);
+        });
+        return;
+    }
+    sendToTelegram();
+});
+
+
 function sendToTelegram() {
     const form = document.getElementById('contactFormInner');
     const errorBox = document.getElementById('formError');
@@ -95,12 +121,6 @@ function sendToTelegram() {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-    //validate form
-    if (!form.checkValidity()) {
-        form.classList.add('was-validated');
-        return;
-    }
-
     const text = `📩 New Contact Submission:\n
     📅 Date: ${dateTime}\n
     👤 Name: ${name}\n
@@ -109,17 +129,18 @@ function sendToTelegram() {
 
     submitBtn.disabled = true;
     submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...`;
-    
-    fetch (`/api/sendMessage`, {
+
+    fetch(`/api/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text 
+        body: JSON.stringify({
+            message: text
         }),
         signal: controller.signal
     })
         .then(response => response.json())
         .then(data => {
-            clearTimeout(timeoutId);    
+            clearTimeout(timeoutId);
 
             if (data.success) {
                 form.reset();
@@ -208,10 +229,9 @@ function scheduleHide() {
     clearTimeout(hideTimer);
     hideTimer = setTimeout(() => {
         const active = document.activeElement;
-        if (!isButtonHovering && !isFormHovering && 
-            !(active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) && 
-        form.dataset.justOpened !== "true") 
-        {
+        if (!isButtonHovering && !isFormHovering &&
+            !(active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) &&
+            form.dataset.justOpened !== "true") {
             hideForm();
         }
     }, 300);
@@ -244,43 +264,7 @@ form.addEventListener('mouseleave', () => {
     scheduleHide();
 });
 
-
-const submitBtn = document.getElementById('submitBtn');
-const nameInput = document.getElementById('nameInput');
-const emailInput = document.getElementById('emailInput');
-const messageInput = document.getElementById('messageInput');
-
-submitBtn.addEventListener('click', (e) => {
-
-    e.preventDefault();
-    sendToTelegram();
-    if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
-        // Shake animation for empty fields
-        [nameInput, emailInput, messageInput].forEach(input => {
-            if (!input.value.trim()) {
-                input.style.animation = 'shake 0.5s ease';
-                setTimeout(() => {
-                    input.style.animation = '';
-                }, 500);
-            }
-        });
-        return;
-    }
-
-});
-
-const style = document.createElement('style');
-style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-8px); }
-                75% { transform: translateX(8px); }
-            }
-`;
-document.head.appendChild(style);
-
-
-
+// Profile Modal
 const profileCard = document.getElementById("profileCard");
 const modal = document.getElementById("customModal");
 const closeProfileBtn = modal.querySelector(".close-profile");
@@ -310,17 +294,43 @@ window.addEventListener("click", (e) => {
 //     profileCard.click();
 // });
 
-const music = document.getElementById('bg-music');
-const MtoggleBtn = document.getElementById('music-toggle');
-let isPlaying = false;
+// const music1 = document.getElementById('bg-music-1');
+// const MtoggleBtn = document.getElementById('music-toggle');
+// let isPlaying = false;
+// music1.volume = 0.05;
 
-MtoggleBtn.addEventListener('click', () => {
-    if (!isPlaying) {
-        music.play();
-        MtoggleBtn.innerHTML = '<i class="bi bi-volume-up-fill fs-3"></i>';
-    }else{
-        music.pause();
-        MtoggleBtn.innerHTML = '<i class="bi bi-volume-mute-fill fs-3"></i>';
-    }
-    isPlaying = !isPlaying;
+// MtoggleBtn.addEventListener('click', () => {
+//     if (!isPlaying) {
+//         music1.play();
+//         MtoggleBtn.innerHTML = '<i class="bi bi-volume-up-fill fs-3"></i>';
+//     } else {
+//         music1.pause();
+//         MtoggleBtn.innerHTML = '<i class="bi bi-volume-mute-fill fs-3"></i>';
+//     }
+//     isPlaying = !isPlaying;
+// });
+
+window.addEventListener('DOMContentLoaded', () => {
+    const song1 = document.getElementById('bg-music-1');
+    const song2 = document.getElementById('bg-music-2');
+    const MtoggleBtn = document.getElementById('music-toggle');
+    let isMuted = false;
+    song1.volume = 0.1;
+    song2.volume = 0.1;
+    // song1.addEventListener('loadedmetadata', () => {
+    //     song1.currentTime = song1.duration - 5;
+    // });
+    song1.addEventListener('ended', () => {
+        song2.play();
+    });
+
+    MtoggleBtn.addEventListener('click', () => {
+        isMuted = !isMuted;
+        song1.muted = isMuted;
+        song2.muted = isMuted;
+        MtoggleBtn.innerHTML = isMuted 
+        ? '<i class="bi bi-volume-mute-fill fs-3"></i>' 
+        : '<i class="bi bi-volume-up-fill fs-3"></i>';
+    });
+
 });
