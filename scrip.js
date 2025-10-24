@@ -26,11 +26,8 @@ window.addEventListener('load', () => {
         document.body.style.overflow = '';
         loader.style.display = 'none';
         document.body.classList.add('loaded');
-    }, 700);
+    },700);
 });
-
-
-
 
 
 //------------------------------
@@ -317,9 +314,16 @@ window.addEventListener('DOMContentLoaded', () => {
     let isMuted = false;
     song1.volume = 0.1;
     song2.volume = 0.1;
-    // song1.addEventListener('loadedmetadata', () => {
-    //     song1.currentTime = song1.duration - 5;
-    // });
+
+    song1.play().then(() => {
+        song1.muted = false;
+    }).catch(() => {
+        document.body.addEventListener('click', () => {
+            song1.muted = false;
+            song1.play();
+        }, { once: true });
+    });
+
     song1.addEventListener('ended', () => {
         song2.play();
     });
