@@ -7,28 +7,64 @@ var typed = new Typed('.your-name', {
 });
 
 const startTime = performance.now();
+const loader = document.getElementById('siteLoader');
+
+let slowShown = false;
+const slowTimer = setTimeout(() => {
+    if (loader) {
+        const slowText = loader.querySelector(".loader-slow");
+        if (slowText) {
+            slowText.style.display = "flex";
+            slowShown = true;
+        }
+    }
+}, 3000);
 
 window.addEventListener('load', () => {
-    const endTime = performance.now();
-    const loadDuration = endTime - startTime;
-    const loader = document.getElementById('siteLoader');
-
-    if (loadDuration > 3000) {
-        const loaderText = loader.querySelector('.loader-text');
-        if (loaderText) loaderText.textContent = "Slow connection detected...";
-    }
 
     loader.style.opacity = '1';
     document.body.style.overflow = 'hidden';
-    loader.classList.add('fade-out');
 
     setTimeout(() => {
         document.body.style.overflow = '';
         loader.style.display = 'none';
         document.body.classList.add('loaded');
-    },700);
+    }, 500);
+    BackgroundMusic('bgMusic1', 'bgMusic2', 'musicToggle');
 });
 
+function BackgroundMusic(bgMusic1, bgMusic2, musicToggle) {
+    const song1 = document.getElementById('bgMusic1');
+    const song2 = document.getElementById('bgMusic2');
+    const MtoggleBtn = document.getElementById('musicToggle');
+    let isMuted = false;
+
+    song1.volume = 0.2;
+    song2.volume = 0.2;
+
+    song1.play().then(()=>{
+        song1.muted = false;
+    })
+    .catch(() => {
+        document.body.addEventListener('click', () => {
+            song1.muted = false;
+            song1.play();
+        }, { once: true });
+    });
+
+    song1.addEventListener('ended', () => song2.play());
+    song2.addEventListener('ended', () => song1.play());
+
+    MtoggleBtn.addEventListener('click', () => {
+        isMuted = !isMuted;
+        song1.muted = isMuted;
+        song2.muted = isMuted;
+
+        MtoggleBtn.innerHTML = isMuted
+            ? '<i class="bi bi-volume-mute-fill fs-3"></i>'
+            : '<i class="bi bi-volume-up-fill fs-3"></i>';
+    });
+}
 
 //------------------------------
 function copyHref(el) {
@@ -62,7 +98,6 @@ function shareSite() {
             .then(() => console.log('Shared successfully'))
             .catch((error) => console.error('Share failed:', error));
     } else {
-        // Fallback: copy to clipboard
         navigator.clipboard.writeText(window.location.href)
             .then(() => {
                 alert("Link copied to clipboard!");
@@ -85,11 +120,11 @@ const messageInput = document.getElementById('messageInput');
 
 formInner.addEventListener('submit', function (e) {
     e.preventDefault();
+    if(form.dataset.justOpened === "true") return;
 
     if (!formInner.checkValidity()) {
         // formInner.reportValidity();
         formInner.classList.add('was-validated');
-
 
         const invalids = formInner.querySelectorAll(':invalid');
         invalids.forEach(input => {
@@ -102,7 +137,6 @@ formInner.addEventListener('submit', function (e) {
     }
     sendToTelegram();
 });
-
 
 function sendToTelegram() {
     const form = document.getElementById('contactFormInner');
@@ -306,35 +340,3 @@ window.addEventListener("click", (e) => {
 //     }
 //     isPlaying = !isPlaying;
 // });
-
-window.addEventListener('DOMContentLoaded', () => {
-    const song1 = document.getElementById('bg-music-1');
-    const song2 = document.getElementById('bg-music-2');
-    const MtoggleBtn = document.getElementById('music-toggle');
-    let isMuted = false;
-    song1.volume = 0.1;
-    song2.volume = 0.1;
-
-    song1.play().then(() => {
-        song1.muted = false;
-    }).catch(() => {
-        document.body.addEventListener('click', () => {
-            song1.muted = false;
-            song1.play();
-        }, { once: true });
-    });
-
-    song1.addEventListener('ended', () => {
-        song2.play();
-    });
-
-    MtoggleBtn.addEventListener('click', () => {
-        isMuted = !isMuted;
-        song1.muted = isMuted;
-        song2.muted = isMuted;
-        MtoggleBtn.innerHTML = isMuted 
-        ? '<i class="bi bi-volume-mute-fill fs-3"></i>' 
-        : '<i class="bi bi-volume-up-fill fs-3"></i>';
-    });
-
-});
