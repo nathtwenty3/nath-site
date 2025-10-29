@@ -42,18 +42,30 @@ function BackgroundMusic(bgMusic1, bgMusic2, musicToggle) {
     song1.volume = 0.2;
     song2.volume = 0.2;
 
-    song1.play().then(()=>{
-        song1.muted = false;
-    })
-    .catch(() => {
-        document.body.addEventListener('click', () => {
-            song1.muted = false;
-            song1.play();
-        }, { once: true });
-    });
 
-    song1.addEventListener('ended', () => song2.play());
-    song2.addEventListener('ended', () => song1.play());
+    const songs = [song1, song2];
+    let currentSong = songs[Math.floor(Math.random() * songs.length)];
+    let nextSong = currentSong === song1 ? song2 : song1;
+
+    const playSong = (song) => {
+        song.play().catch(() => {
+            document.body.addEventListener('click', () => {
+                song.muted = false;
+                song.play();
+            }, { once: true });
+        });
+    };
+    
+    playSong(currentSong);
+
+    songs.forEach(s => {
+        s.addEventListener('ended', () => {
+            if (s === currentSong) {
+                [currentSong, nextSong] = [nextSong, currentSong];
+                playSong(currentSong);
+            }
+        });
+    });
 
     MtoggleBtn.addEventListener('click', () => {
         isMuted = !isMuted;
