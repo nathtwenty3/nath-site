@@ -5,14 +5,14 @@ export default async function handler(req, res) {
     if (!TELEGRAM_TOKEN || !CHAT_ID) {
         return res.status(500).json({ error: "Missing Telegram credentials" });
     }
-
-    const telegramURL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-
+    
     try {
         const message = req.query.message || req.body?.message;
-        if (!message) {
+        if (!message || message.trim() === "") {
             return res.status(400).json({ error: "No message provided" });
         }
+
+        const telegramURL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
 
         const response = await fetch(telegramURL, {
             method: "POST",
@@ -25,6 +25,16 @@ export default async function handler(req, res) {
         });
 
         const data = await response.json();
+
+        if (!response.ok || !data.ok) {
+            console.error("Telegram API Error:", data);
+            
+            return res.status(502).json({
+                success: false,
+                error: data.description || "Telegram API failed"
+            });
+        }
+
         res.status(200).json({ success: true, data });
     } catch (error) {
         console.error("Error sending message to Telegram:", error);
