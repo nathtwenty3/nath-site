@@ -12,12 +12,12 @@ let slowShown = false;
 
 const slowTimer = setTimeout(() => {
     if (!loader) return;
-        const slowText = loader.querySelector(".loader-slow");
+    const slowText = loader.querySelector(".loader-slow");
     if (slowText) {
         slowText.style.display = "flex";
         slowShown = true;
     }
-}, 3000);
+}, 4000);
 
 window.addEventListener('load', () => {
     clearTimeout(slowTimer);

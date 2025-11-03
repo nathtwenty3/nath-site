@@ -97,7 +97,7 @@ a.tile:hover {
   position: fixed;
   bottom: 30%;
   font-weight: 400;
-  display: flex;
+  display: none;
 }
 
 @keyframes ring {
