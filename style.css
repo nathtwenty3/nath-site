@@ -59,6 +59,66 @@ a.tile:hover {
   margin-left: auto;
   margin-right: auto;
 }
+.site-loader {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.7s ease-in-out;
+  opacity: 1;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  z-index: 9999;
+}
+
+.loader-ring{
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  animation: ring 2s linear infinite;
+}
+.loader-ring::before{
+  display: flex;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+.loader-text{
+  font-size: .8rem;
+  color: white;
+  animation: text 4s linear infinite;
+}
+.loader-slow{
+  position: fixed;
+  bottom: 30%;
+  font-weight: 400;
+  display: flex;
+}
+
+@keyframes ring {
+  0% {
+    transform: rotate(0deg);
+    box-shadow: 0 2px 2px #22ff00, 0 3px 2px #00bcd4;
+  }
+  50% {
+    transition: rotate(180deg);
+    box-shadow: 0 2px 2px #00bcd4, 0 3px 2px #ff0088;
+  }
+  100% {
+    transform: rotate(360deg);
+    box-shadow: 0 2px 2px #ff0088, 0 3px 2px #22ff00;
+  }
+}
+@keyframes text {
+  50% {
+    opacity: 0.3;
+  }
+}
 
 @media (min-width: 768px) {
   .links-container {
@@ -66,6 +126,14 @@ a.tile:hover {
   }
   body{
     overflow: none;
+  }
+  .loader-ring{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+  }
+  .loader-text{
+    font-size: 1rem;
   }
 }
 
@@ -212,7 +280,7 @@ a.tile:hover {
   background-color: rgba(255, 102, 168, 0.2);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  box-shadow: 0 12px 32px rgba(119, 28, 67, 0.4);
+  box-shadow: 0 12px 32px rgba(119, 28, 67, 0.5);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1;
 }
@@ -373,7 +441,7 @@ body.loaded .contact-float {
   background: conic-gradient(
     from 0deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.2),
     transparent 30%
   );
   animation: rotate 3s linear infinite;
@@ -386,80 +454,18 @@ body.loaded .contact-float {
   }
 }
 
-/* Loading  */
-.site-loader {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.7s ease-in-out;
-  opacity: 1;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-  z-index: 9999;
-}
-
-.loader-ring{
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  animation: ring 2s linear infinite;
-}
-.loader-ring::before{
-  display: flex;
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-}
-.loader-text{
-  font-size: 1rem;
-  color: white;
-  animation: text 4s linear infinite;
-}
-.loader-slow{
-  position: fixed;
-  bottom: 30%;
-  font-weight: 400;
-  display: none;
-}
-
-@keyframes ring {
-  0% {
-    transform: rotate(0deg);
-    box-shadow: 0 2px 2px #22ff00, 0 3px 2px #00bcd4;
-  }
-  50% {
-    transition: rotate(180deg);
-    box-shadow: 0 2px 2px #00bcd4, 0 3px 2px #ff0088;
-  }
-  100% {
-    transform: rotate(360deg);
-    box-shadow: 0 2px 2px #ff0088, 0 3px 2px #22ff00;
-  }
-}
-@keyframes text {
-  50% {
-    opacity: 0.3;
-  }
-}
-
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 70, 136, 0.3);
-  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.7);
   border-radius: 20px;
   transition: background-color 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0, 70, 136, 0.5);
-  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.8);
 
 }
 

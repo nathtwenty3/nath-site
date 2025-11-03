@@ -8,64 +8,128 @@ var typed = new Typed('.your-name', {
 
 const startTime = performance.now();
 const loader = document.getElementById('siteLoader');
-
 let slowShown = false;
+
 const slowTimer = setTimeout(() => {
-    if (loader) {
+    if (!loader) return;
         const slowText = loader.querySelector(".loader-slow");
-        if (slowText) {
-            slowText.style.display = "flex";
-            slowShown = true;
-        }
+    if (slowText) {
+        slowText.style.display = "flex";
+        slowShown = true;
     }
 }, 3000);
 
 window.addEventListener('load', () => {
+    clearTimeout(slowTimer);
 
-    loader.style.opacity = '1';
-    document.body.style.overflow = 'hidden';
+    if(loader){
+        loader.style.opacity = '1';
+        document.body.style.overflow = 'hidden';
 
-    setTimeout(() => {
-        document.body.style.overflow = '';
-        loader.style.display = 'none';
-        document.body.classList.add('loaded');
-    }, 500);
+        setTimeout(() => {
+            document.body.style.overflow = '';
+            loader.style.display = 'none';
+            document.body.classList.add('loaded');
+
+            const slowText = loader.querySelector?.(".loader-slow");
+            if(slowText) slowText.style.display = '';
+        }, 500);
+    }
     BackgroundMusic('bgMusic1', 'bgMusic2', 'musicToggle');
 });
 
-function BackgroundMusic(bgMusic1, bgMusic2, musicToggle) {
-    const song1 = document.getElementById('bgMusic1');
-    const song2 = document.getElementById('bgMusic2');
-    const MtoggleBtn = document.getElementById('musicToggle');
-    let isMuted = false;
+// function BackgroundMusic(bgMusic1, bgMusic2, musicToggle) {
+//     const song1 = document.getElementById('bgMusic1');
+//     const song2 = document.getElementById('bgMusic2');
+//     const MtoggleBtn = document.getElementById('musicToggle');
+//     let isMuted = false;
+
+//     song1.volume = 0.2;
+//     song2.volume = 0.2;
+
+
+//     const songs = [song1, song2];
+//     let currentSong = songs[Math.floor(Math.random() * songs.length)];
+//     let nextSong = currentSong === song1 ? song2 : song1;
+
+//     const playSong = (song) => {
+//         song.play().catch(() => {
+//             document.body.addEventListener('click', () => {
+//                 song.muted = false;
+//                 song.play();
+//             }, { once: true });
+//         });
+//     };
+    
+//     playSong(currentSong);
+
+//     songs.forEach(s => {
+//         s.addEventListener('ended', () => {
+//             if (s === currentSong) {
+//                 [currentSong, nextSong] = [nextSong, currentSong];
+//                 playSong(currentSong);
+//             }
+//         });
+//     });
+
+//     MtoggleBtn.addEventListener('click', () => {
+//         isMuted = !isMuted;
+//         song1.muted = isMuted;
+//         song2.muted = isMuted;
+
+//         MtoggleBtn.innerHTML = isMuted
+//             ? '<i class="bi bi-volume-mute-fill fs-3"></i>'
+//             : '<i class="bi bi-volume-up-fill fs-3"></i>';
+//     });
+// }
+
+
+
+// ---------- Background music handler ----------
+function BackgroundMusic(bgMusic1Id, bgMusic2Id, musicToggleId) {
+    const song1 = document.getElementById(bgMusic1Id);
+    const song2 = document.getElementById(bgMusic2Id);
+    const MtoggleBtn = document.getElementById(musicToggleId);
+
+    if (!song1 || !song2 || !MtoggleBtn) return;
 
     song1.volume = 0.2;
     song2.volume = 0.2;
-
+    song1.loop = false;
+    song2.loop = false;
 
     const songs = [song1, song2];
-    let currentSong = songs[Math.floor(Math.random() * songs.length)];
-    let nextSong = currentSong === song1 ? song2 : song1;
+    let currentIndex = Math.floor(Math.random() * songs.length);
+    let currentSong = songs[currentIndex];
+    let nextSong = songs[(currentIndex + 1) % songs.length];
 
-    const playSong = (song) => {
-        song.play().catch(() => {
-            document.body.addEventListener('click', () => {
-                song.muted = false;
-                song.play();
-            }, { once: true });
+    let isMuted = false;
+
+    // MtoggleBtn.innerHTML = '<i class="bi bi-volume-up-fill fs-3"></i>';
+
+    const tryPlay = (s) => {
+        s.muted = isMuted;
+        s.play().catch(() => {
+            const onFirstClick = () => {
+                s.muted = isMuted;
+                s.play().catch(() => { /* second failure, ignore */ });
+                document.body.removeEventListener('click', onFirstClick);
+            };
+            document.body.addEventListener('click', onFirstClick, { once: true });
         });
     };
-    
-    playSong(currentSong);
 
-    songs.forEach(s => {
-        s.addEventListener('ended', () => {
-            if (s === currentSong) {
-                [currentSong, nextSong] = [nextSong, currentSong];
-                playSong(currentSong);
-            }
-        });
-    });
+    tryPlay(currentSong);
+
+    currentSong.addEventListener('ended', function handleFirstEnd() {
+        nextSong.currentTime = 0;
+        nextSong.loop = true;
+
+        currentSong = nextSong;
+        tryPlay(currentSong);
+
+        this.removeEventListener('ended', handleFirstEnd);
+    }, { once: true });
 
     MtoggleBtn.addEventListener('click', () => {
         isMuted = !isMuted;
@@ -77,6 +141,7 @@ function BackgroundMusic(bgMusic1, bgMusic2, musicToggle) {
             : '<i class="bi bi-volume-up-fill fs-3"></i>';
     });
 }
+
 
 //------------------------------
 function copyHref(el) {
