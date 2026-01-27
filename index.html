@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/img/logo.png">
-    
+
     <title>Nath Site</title>
     <link rel="stylesheet" href="/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
@@ -21,16 +21,8 @@
         <span class="loader-slow justify-content-center align-items-center">Slow connection detected...</span>
     </div>
 
-    <main class="main-container">
+    <main class="main-container d-flex flex-column">
         <header class="d-flex justify-content-end align-items-center p-3">
-            
-            <audio id="bgMusic1" src="music/HIGHEST IN THE ROOM.mp3" preload="auto"></audio>
-            <audio id="bgMusic2" src="music/Too Many Nights.mp3" preload="auto"></audio>
-
-            <button id="musicToggle" class="music-btn position-fixed top-10 start-0 m-2">
-                <i class="bi bi-volume-up-fill fs-3"></i>
-            </button>
-
             <div class="share-btn rounded-circle d-flex justify-content-center align-items-center"
                 style="height: 40px; width: 40px;" onclick="shareSite()">
                 <i class="bi bi-box-arrow-up fs-4"></i>
@@ -39,95 +31,67 @@
         <div class="container d-flex flex-column align-items-center justify-content-center mt-1">
             <div id="formError" class="text-center mt-3 position-absolute left-20 sticky-top text-danger" role="alert">
             </div>
-        
+
             <div id="profileCard" class="image-container mb-3 rounded-circle"
                 style="width: 160px; height: 160px; cursor: pointer;">
                 <img class="img-fluid rounded-circle modal-img-animate" src="/img/pr.jpg" alt="Profile image">
             </div>
+
             <div id="customModal" class="profile-modal">
                 <span class="close-profile fw-light">&times;</span>
-                <img class="modal-img-animate rounded-circle" src="/img/pr.jpg" alt="Detailed profile"
-                    style="max-height: 360px;">
+                <img class="modal-img-animate rounded-circle" src="/img/pr.jpg" alt="Detailed profile" style="max-height: 360px;">
             </div>
-            <!-- Name can change in script.js -->
-            <h2 class="mb-5 text-center" style="font-weight: bold">
-                <span class="your-name">
-                </span>
-            </h2>
+
+            <div class="your-name text-center mb-4 mt-4">
+                <h2>Neng Phanath</h2>
+            </div>
 
             <!-- Links -->
-            <div class="links-container w-100">
-                <a href="https://www.instagram.com/nath_twenty3/" target="_blank"
-                    class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
-                    <i class="bi bi-instagram fs-4 position-absolute start-0 ms-3"></i>
-                    <span class="mx-auto">Instagram</span>
-                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
-                        <i class="bi bi-link-45deg fs-4"></i>
-                    </div>
-                </a>
+            <div class="links-container w-100" id="linksContainer">
+                <!-- fecth link from sheet -->
+            </div>
+
+            <!-- <div class="links-container w-100">
                 <a href="https://www.facebook.com/nath.twenty3/" target="_blank"
                     class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
                     <i class="bi bi-facebook fs-4 position-absolute start-0 ms-3"></i>
-                    <span class="mx-auto">Facebook</span>
-                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
-                        <i class="bi bi-link-45deg fs-4"></i>
+                    <span class="mx-auto">Test</span>
+
+                    <div class="icon-link icon-link-hover position-absolute end-0 me-3"
+                        style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" onclick="copyHref(event, this)"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        data-bs-title="Copy to clipboard">
+                        <svg xmlns=" http://www.w3.org/2000/svg" fill="currentColor" class="bi" viewBox="0 0 16 16">
+                        <g class="icon-normal">
+                            <path
+                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                            <path
+                                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                        </g>
+                        <g class="icon-success d-none">
+                            <path
+                                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
+                        </g>
+                        </svg>
                     </div>
                 </a>
-                <a href="https://t.me/NENGPHANATH" target="_blank"
-                    class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
-                    <i class="bi bi-telegram fs-4 position-absolute start-0 ms-3"></i>
-                    <span class="mx-auto">Telegram</span>
-                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
-                        <i class="bi bi-link-45deg fs-4"></i>
-                    </div>
-                </a>
-                <a href="https://youtube.com/@nath_twenty3" target="_blank"
-                    class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
-                    <i class="bi bi-youtube fs-4 position-absolute start-0 ms-3"></i>
-                    <span class="mx-auto">YouTube</span>
-                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
-                        <i class="bi bi-link-45deg fs-4"></i>
-                    </div>
-                </a>
-                <a href="https://github.com/nathtwenty3" target="_blank"
-                    class="tile w-100 mb-3 d-flex align-items-center position-relative text-white">
-                    <i class="bi bi-github fs-4 position-absolute start-0 ms-3"></i>
-                    <span class="mx-auto">GitHub</span>
-                    <div class="copy-link-btn position-absolute end-0 me-3 top-50 translate-middle-y" onclick="copyHref(this)">
-                        <i class="bi bi-link-45deg fs-4"></i>
-                    </div>
-                </a>
-            </div>
-            <div class="icon-bar d-flex justify-content-center gap-4 mt-5">
-                <a href="https://instagram.com/nath_twenty3" target="_blank" class="text-light fs-3">
-                    <i class="bi bi-instagram"></i>
-                </a>
-                <a href="https://facebook.com/nath.twenty3" target="_blank" class="text-light fs-3">
-                    <i class="bi bi-facebook"></i>
-                </a>
-                <a href="https://t.me/NENGPHANATH" target="_blank" class="text-light fs-3">
-                    <i class="bi bi-telegram"></i>
-                </a>
-                <a href="https://youtube.com/@nath_twenty3" target="_blank" class="text-light fs-3">
-                    <i class="bi bi-youtube"></i>
-                </a>
-                <a href="https://github.com/nathtwenty3" target="_blank" class="text-light fs-3">
-                    <i class="bi bi-github"></i>
-                </a>
+            </div> -->
+
+            <!-- Icon Bar -->
+            <div id="iconBar" class="icon-bar d-flex justify-content-center gap-4 mt-5 mb-4">
+                <!-- fecth icon from sheet -->
             </div>
         </div>
         <div class="widget-overlay" id="overlay"></div>
 
-        <footer>
-            <div class="text-center mt-5 mb-2 text-sm" style="font-size: smaller;">
+        <footer class="mt-auto">
+            <div class="text-center mt-3 mb-2 text-sm" style="font-size: smaller; color: rgba(255, 255, 255, 0.6);">
                 © 2025 Neng Phanath Inc. All rights reserved.
             </div>
         </footer>
     </main>
-    
-    
-    
-    
+
     <!------- Chat ----->
     <div class="contact-float" id="contactFloat">
         <div id="contactToggle" class="contact-btn fs-3 d-flex justify-content-center align-items-center rounded-circle"
@@ -136,9 +100,11 @@
         </div>
         <div class="contact-form" id="contactForm">
             <h3 class="text-center mb-3 mt-2 " style="font-family:Arial, Helvetica, sans-serif">Contact me</h3>
-            <button type="button" id="closeBtn" class="btn-close shadow-none position-absolute top-0 end-0 m-3"></button>
-            <form id="contactFormInner" class="needs-validation optional" novalidate style="font-family: Source Sans 3;">
-    
+            <button type="button" id="closeBtn"
+                class="btn-close shadow-none position-absolute top-0 end-0 m-3"></button>
+            <form id="contactFormInner" class="needs-validation optional" novalidate
+                style="font-family: Source Sans 3;">
+
                 <div class="modal-body mt-2">
                     <div class="mb-4">
                         <input type="text" id="nameInput" name="name" class="form-control shadow-none"
@@ -157,7 +123,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="mt-3 w-100 d-flex justify-content-center">
                     <button type="submit" id="submitBtn" class="submit-btn" role="button">
                         <span class="spinner d-none"></span>
@@ -167,19 +133,14 @@
                 </div>
                 <div id="formError" class="text-center mt-3 d-none text-danger" role="alert">
                     <i class="bi bi-emoji-frown"></i>
-                    <!-- Network error. Please try again. -->
                     Something went wrong
                 </div>
             </form>
         </div>
     </div>
     <!------- End Chat ----->
-    
-    
-
-
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="scrip.js"></script>
+    <script type="module" src="script.js"></script>
+    <script src="services/telegram-bot.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
