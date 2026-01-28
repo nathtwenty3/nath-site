@@ -91,7 +91,7 @@ const messageInput = document.getElementById('messageInput');
 
 formInner.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (form.dataset.justOpened === "true") return;
+    if (formInner.dataset.justOpened === "true") return;
 
     if (!formInner.checkValidity()) {
         formInner.classList.add('was-validated');
