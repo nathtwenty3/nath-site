@@ -165,7 +165,7 @@ profileCard.addEventListener("click", () => {
     modal.style.display = "flex";
     modal.classList.remove('closing');
     toggleBtn.classList.add('hide');
-    
+
     overlay.classList.add('active');
     overlay.classList.add('profile-active');
     document.body.style.overflow = 'hidden';
@@ -179,11 +179,11 @@ function closeProfile() {
     modal.classList.remove("show");
     modal.classList.add('closing');
     toggleBtn.classList.remove('hide');
-    
+
     overlay.classList.remove('active');
     overlay.classList.remove('profile-active');
     document.body.style.overflow = '';
-    
+
     setTimeout(() => {
         modal.style.display = "none";
         modal.classList.remove("closing");
@@ -246,13 +246,10 @@ async function loadFrontendLinks() {
             a.target = "_blank";
             a.className = "tile w-100 mb-3 d-flex align-items-center position-relative text-white";
             a.innerHTML = `
-                    <i class="bi bi-${link.icon || "link-45deg"} fs-4 position-absolute start-0 ms-3"></i>
+                    <i class="bi bi-${link.icon} fs-4 position-absolute start-0 ms-3"></i>
                     <span class="mx-auto">${link.title}</span>
-                    <div class="icon-link icon-link-hover position-absolute end-0 me-3" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" 
-                        onclick="copyHref(event, this)" 
-                        data-bs-toggle="tooltip" 
-                        data-bs-placement="top"
-                        data-bs-title="Copy">
+
+                    <div class="icon-link icon-link-hover position-absolute end-0 me-3" style="--bs-icon-link-transform: translate3d(0, -.145rem, 0);">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi" viewBox="0 0 16 16">
                             <g class="icon-normal">
                                 <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
@@ -263,11 +260,11 @@ async function loadFrontendLinks() {
                             </g>
                         </svg>
                     </div>
-                `;
+            `;
+            const copyBtn = a.querySelector('.icon-link');
+            copyBtn.addEventListener('click', (e) => copyHref(e, copyBtn));
             container.appendChild(a);
         });
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
 
         linksLoaded = true;
         checkBothLoaded();
@@ -318,6 +315,7 @@ function copyHref(evt, el) {
         document.body.removeChild(tmp);
         showSuccess();
     }
+    window.copyHref = copyHref;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
