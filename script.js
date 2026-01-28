@@ -31,10 +31,6 @@ function hideLoader() {
     }
 }
 
-// Wait for both page load AND links data
-// let pageLoaded = true;
-// let linksLoaded = true;
-
 let pageLoaded = false;
 let linksLoaded = false;
 
@@ -208,7 +204,10 @@ function loadFrontendLinks() {
     const container = document.getElementById("linksContainer");
     const iconBar = document.getElementById("iconBar");
 
-    fetch(`${API_URL}?action=get`)
+    fetch(`${API_URL}?action=get`,{
+            method: 'GET',
+            redirect: 'follow',
+    })
         .then(res => res.json())
         .then(data => {
 
