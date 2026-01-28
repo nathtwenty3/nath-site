@@ -1,4 +1,4 @@
-import { fetchLinks } from './api/linkService.js';
+import { fetchLinks } from './services/linkService.js';
 
 const startTime = performance.now();
 const loader = document.getElementById('siteLoader');
