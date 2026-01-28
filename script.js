@@ -1,4 +1,4 @@
-import { API_URL } from './api/url.js';
+import { fetchLinks } from './api/linkService.js';
 
 const startTime = performance.now();
 const loader = document.getElementById('siteLoader');
@@ -196,60 +196,56 @@ window.addEventListener("click", (e) => {
         closeProfile();
 });
 
-
-// const API_URL = "https://script.google.com/macros/s/AKfycbwCJBygEWeCo2UIh2ZX0GrwPPADVqwcMtViFk1X5m8Bj7dGZiKtkMhLXB5hfBQhAv4/exec";
-
 // Fecth Data and load links
-function loadFrontendLinks() {
+async function loadFrontendLinks() {
     const container = document.getElementById("linksContainer");
     const iconBar = document.getElementById("iconBar");
 
-    fetch(`${API_URL}?action=get`,{
-            method: 'GET',
-            redirect: 'follow',
-    })
-        .then(res => res.json())
-        .then(data => {
+    try {
+        const response = await fetchLinks();
+        const data = response;
 
-            if (!Array.isArray(data)) {
-                container.innerHTML = "<p class='text-danger text-center'>No links found</p>";
-                return;
-            }
-            // filter active links
-            const links = data.filter(
-                link => link.active === "TRUE" || link.active === true
+        if (!Array.isArray(data)) {
+            container.innerHTML = "<p class='text-danger text-center'>No links found</p>";
+            linksLoaded = true;
+            checkBothLoaded();
+            return;
+        }
+        // filter active links
+        const links = data.filter(
+            link => link.active === "TRUE" || link.active === true
+        );
+        links.sort((a, b) => (parseInt(a.order) || 999) - (parseInt(b.order) || 999));
+
+        iconBar.innerHTML = "";
+        const isBarHidden = String(data.showInBar).toUpperCase() === "TRUE";
+        if (isBarHidden) {
+            iconBar.style.setProperty('display', 'none', 'important');
+        } else {
+            iconBar.style.display = "flex";
+
+            const barLinks = links.filter(l =>
+                String(l.active).toUpperCase() === "TRUE" &&
+                String(l.showInBar).toUpperCase() === "TRUE"
             );
-            links.sort((a, b) => (parseInt(a.order) || 999) - (parseInt(b.order) || 999));
 
             iconBar.innerHTML = "";
-            const isBarHidden = String(data.showInBar).toUpperCase() === "TRUE";
-            if (isBarHidden) {
-                iconBar.style.setProperty('display', 'none', 'important');
-            } else {
-                iconBar.style.display = "flex";
-
-                const barLinks = links.filter(l =>
-                    String(l.active).toUpperCase() === "TRUE" &&
-                    String(l.showInBar).toUpperCase() === "TRUE"
-                );
-
-                iconBar.innerHTML = "";
-                barLinks.forEach(link => {
-                    const a = document.createElement("a");
-                    a.href = link.url;
-                    a.target = "_blank";
-                    a.className = "text-light fs-3 mx-2";
-                    a.innerHTML = `<i class="bi bi-${link.icon}"></i>`;
-                    iconBar.appendChild(a);
-                });
-            }
-            container.innerHTML = "";
-            links.forEach(link => {
+            barLinks.forEach(link => {
                 const a = document.createElement("a");
                 a.href = link.url;
                 a.target = "_blank";
-                a.className = "tile w-100 mb-3 d-flex align-items-center position-relative text-white";
-                a.innerHTML = `
+                a.className = "text-light fs-3 mx-2";
+                a.innerHTML = `<i class="bi bi-${link.icon}"></i>`;
+                iconBar.appendChild(a);
+            });
+        }
+        container.innerHTML = "";
+        links.forEach(link => {
+            const a = document.createElement("a");
+            a.href = link.url;
+            a.target = "_blank";
+            a.className = "tile w-100 mb-3 d-flex align-items-center position-relative text-white";
+            a.innerHTML = `
                     <i class="bi bi-${link.icon || "link-45deg"} fs-4 position-absolute start-0 ms-3"></i>
                     <span class="mx-auto">${link.title}</span>
                     <div class="icon-link icon-link-hover position-absolute end-0 me-3" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);" 
@@ -268,22 +264,21 @@ function loadFrontendLinks() {
                         </svg>
                     </div>
                 `;
-                container.appendChild(a);
-            });
-            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-            tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
-
-            linksLoaded = true;
-            checkBothLoaded();
-
-        })
-        .catch(err => {
-            console.error("Failed to fetch links:", err);
-            container.innerHTML = "<p class='text-center'>Failed to load links</p>";
-
-            linksLoaded = true;
-            checkBothLoaded();
+            container.appendChild(a);
         });
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+
+        linksLoaded = true;
+        checkBothLoaded();
+
+    } catch (error) {
+        console.error("Failed to fetch links:", error);
+        container.innerHTML = "<p class='text-center'>Failed to load links</p>";
+
+        linksLoaded = true;
+        checkBothLoaded();
+    }
 }
 
 // Copy to clipboard function
