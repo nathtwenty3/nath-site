@@ -1,4 +1,5 @@
-import { API_URL } from './ApiUrl.js';
+
+const API_URL = "https://script.google.com/macros/s/AKfycbwCJBygEWeCo2UIh2ZX0GrwPPADVqwcMtViFk1X5m8Bj7dGZiKtkMhLXB5hfBQhAv4/exec";
 
 export async function getAllLinks() {
     try {
@@ -15,29 +16,4 @@ export async function getAllLinks() {
         console.error("Failed to fetch links:", err);
         throw err;
     }
-}
-
-export async function createLink(linkData) {
-    try {
-        const formData = new FormData();
-        formData.append('action', 'add');
-        formData.append('title', linkData.title);
-        formData.append('url', linkData.url);
-        if (linkData.imageFile) {
-            formData.append('image', linkData.imageFile);
-        }
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            body: formData,
-            redirect: 'follow',
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }  
-        const result = await response.json();
-        return result;
-    } catch (err) {
-        console.error("Failed to add link:", err);
-        throw err;
-    } 
 }
