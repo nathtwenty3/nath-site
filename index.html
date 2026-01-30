@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -24,21 +24,23 @@
     <main class="main-container d-flex flex-column">
         <header class="d-flex justify-content-end align-items-center p-3">
             <div class="share-btn rounded-circle d-flex justify-content-center align-items-center"
-                style="height: 40px; width: 40px;" onclick="shareSite()">
+                style="height: 40px; width: 40px;" data-bs-toggle="modal" data-bs-target="#shareModal"
+                title="Share this site">
                 <i class="bi bi-box-arrow-up fs-4"></i>
             </div>
         </header>
+
         <div class="container d-flex flex-column align-items-center justify-content-center mt-1">
             <div id="formError" class="text-center mt-3 position-absolute left-20 sticky-top text-danger" role="alert">
             </div>
 
-            <div id="profileCard" class="image-container mb-3 rounded-circle"
+            <div id="profileCard" onclick="openProfile()" class="image-container mb-3 rounded-circle"
                 style="width: 160px; height: 160px; cursor: pointer;">
                 <img class="img-fluid rounded-circle modal-img-animate" src="/img/pr.jpg" alt="Profile image">
             </div>
 
             <div id="customModal" class="profile-modal">
-                <span class="close-profile fw-light">&times;</span>
+                <span class="close-profile fw-light fs-5"><i class="bi bi-x-lg"></i></span>
                 <img class="modal-img-animate rounded-circle" src="/img/pr.jpg" alt="Detailed profile"
                     style="max-height: 360px;">
             </div>
@@ -47,10 +49,11 @@
                 <h2>Neng Phanath</h2>
             </div>
 
-            <!-- Links -->
+            <!-------- Links --------->
             <div class="links-container w-100" id="linksContainer">
-                <!-- fecth link from sheet -->
+                <!-- fecth links from sheet -->
             </div>
+
 
             <!-- <div class="links-container w-100">
                 <a href="https://www.facebook.com/nath.twenty3/" target="_blank"
@@ -92,6 +95,85 @@
             </div>
         </footer>
     </main>
+    <!------- Share modal ----->
+
+    <div class="modal share-modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title" id="shareModalLabel">Share this site</h5>
+                    <span class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></span>
+                </div>
+
+                <divh class="modal-body d-flex flex-column ">
+                    <span class="mb-3 fw-semibold">Share via</span>
+                    <div class="d-flex gap-3 flex-wrap mb-4 justify-content-center">
+                        <!-- Share via -->
+                        <div class="d-flex flex-column align-items-center">
+                            <a id="viaShare" class="share-icon via-icon d-flex" onclick="shareSite()">
+                                <i class="bi bi-upload fs-4"></i>
+                            </a>
+                            <span class="mt-2 small text-muted">Share via</span>
+                        </div>
+                        <!-- facebook -->
+                        <div class="d-flex flex-column align-items-center">
+                            <a href="#" id="facebookShare" class="share-icon facebook-icon d-flex"
+                                onclick="shareTo('facebook')">
+                                <i class="bi bi-facebook fs-4"></i>
+                            </a>
+                            <span class="mt-2 small text-muted">facebook</span>
+                        </div>
+                        <!-- instagram -->
+                        <div class="d-flex flex-column align-items-center">
+                            <a href="#" id="instagramShare" class="share-icon instagram-icon d-flex"
+                                onclick="shareTo('instagram')">
+                                <i class="bi bi-instagram fs-4"></i>
+                            </a>
+                            <span class="mt-2 small text-muted">Instagram</span>
+                        </div>
+                        <!-- Telegram -->
+                        <div class="d-flex flex-column align-items-center">
+                            <a href="#" id="telegramShare" class="share-icon telegram-icon d-flex"
+                                onclick="shareTo('telegram')">
+                                <i class="bi bi-telegram fs-4"></i>
+                            </a>
+                            <span class="mt-2 small text-muted">Telegram</span>
+                        </div>
+                        <!-- Twitter -->
+                        <div class="d-flex flex-column align-items-center">
+                            <a href="#" id="twitterShare" class="share-icon twitter-icon d-flex"
+                                onclick="shareTo('twitter')">
+                                <i class="bi bi-twitter fs-4"></i>
+                            </a>
+                            <span class="mt-2 small text-muted">Twitter</span>
+                        </div>
+                        <!-- Whatsapp -->
+                        <div class="d-flex flex-column align-items-center">
+                            <a href="#" id="whatsappShare" class="share-icon whatsapp-icon d-flex"
+                                onclick="shareTo('whatsapp')">
+                                <i class="bi bi-whatsapp fs-4"></i>
+                            </a>
+                            <span class="mt-2 small text-muted">Whatsapp</span>
+                        </div>
+                    </div>
+                    <span class="mb-3 fw-semibold">Or copy link</span>
+                    <div class="border rounded-pill p-2 d-flex justify-content-center align-items-center">
+                        <i class="bi bi-link-45deg ms-3 fs-4"></i>
+                        <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly
+                            id="copyLinkInput">
+                        <button class="btn btn-light rounded-pill text-nowrap w-25" id="copyLinkButton">
+                            <i class="bi bi-copy"></i>
+                            Copy
+                        </button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- End Share modal ----->
+
 
     <!------- Chat ----->
     <div class="contact-float" id="contactFloat">
@@ -101,8 +183,8 @@
         </div>
         <div class="contact-form" id="contactForm">
             <h3 class="text-center mb-3 mt-2 " style="font-family:Arial, Helvetica, sans-serif">Contact me</h3>
-            <button type="button" id="closeBtn"
-                class="btn-close shadow-none position-absolute top-0 end-0 m-3"></button>
+            <button type="button" id="closeBtn" class="btn-close shadow-none position-absolute top-0 end-0 m-3">
+            </button>
             <form id="contactFormInner" class="needs-validation optional" novalidate
                 style="font-family: Source Sans 3;">
 
@@ -129,7 +211,6 @@
                     <button type="submit" id="submitBtn" class="submit-btn" role="button">
                         <span class="spinner d-none"></span>
                         <i class="bi bi-send-fill me-2"></i> Send
-                        <!-- <i class="bi bi-check2 me-2"></i> Send -->
                     </button>
                 </div>
                 <div id="formError" class="text-center mt-3 d-none text-danger" role="alert">
@@ -140,11 +221,14 @@
         </div>
     </div>
     <!------- End Chat ----->
+
     <script type="module" src="script.js"></script>
     <script src="services/telegram-bot.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-import { fetchLinks } from './services/linkService.js';
+import { getAllLinks } from './services/linkService.js';
 
 const startTime = performance.now();
 const loader = document.getElementById('siteLoader');
@@ -14,6 +14,10 @@ const slowTimer = setTimeout(() => {
 }, 10000);
 
 function hideLoader() {
+    document.body.style.overflow = '';
+    loader.style.display = 'none';
+    document.body.classList.add('loaded');
+
     clearTimeout(slowTimer);
 
     if (loader) {
@@ -45,32 +49,9 @@ function checkBothLoaded() {
     }
 }
 
-function shareSite() {
-    const shareData = {
-        title: document.title,
-        text: "Check out this site!",
-        url: window.location.href
-    };
-
-    if (navigator.share) {
-        navigator.share(shareData)
-            .then(() => console.log('Shared successfully'))
-            .catch((error) => console.error('Share failed:', error));
-    } else {
-        navigator.clipboard.writeText(window.location.href)
-            .then(() => {
-                alert("Link copied to clipboard!");
-            })
-            .catch((err) => {
-                console.error("Clipboard copy failed:", err);
-            });
-    }
-}
-
 //------------------------------
 const toggleBtn = document.getElementById('contactToggle');
 const form = document.getElementById('contactForm');
-const contactFloat = document.getElementById('contactFloat');
 const closeBtn = document.getElementById('closeBtn');
 const overlay = document.getElementById('overlay');
 const inputs = form.querySelectorAll('input, textarea');
@@ -140,55 +121,52 @@ toggleBtn.addEventListener('mouseenter', () => {
     isButtonHovering = true;
     showForm();
 });
-
 toggleBtn.addEventListener('mouseleave', () => {
     isButtonHovering = false;
     scheduleHide();
 });
-
 form.addEventListener('mouseenter', () => {
     isFormHovering = true;
     showForm();
 });
-
 form.addEventListener('mouseleave', () => {
     isFormHovering = false;
     scheduleHide();
 });
 
-// Profile Modal
+// Profile Modal function
 const profileCard = document.getElementById("profileCard");
 const modal = document.getElementById("customModal");
 const closeProfileBtn = modal.querySelector(".close-profile");
 
-profileCard.addEventListener("click", () => {
+function openProfile() {
     modal.style.display = "flex";
     modal.classList.remove('closing');
-    toggleBtn.classList.add('hide');
 
-    overlay.classList.add('active');
-    overlay.classList.add('profile-active');
+    toggleBtn.classList.add('hide');
+    overlay.classList.add('active','profile-active');
     document.body.style.overflow = 'hidden';
 
     requestAnimationFrame(() => {
         modal.classList.add("show");
     });
-});
+}
 
 function closeProfile() {
     modal.classList.remove("show");
     modal.classList.add('closing');
-    toggleBtn.classList.remove('hide');
 
-    overlay.classList.remove('active');
-    overlay.classList.remove('profile-active');
+    toggleBtn.classList.remove('hide');
+    overlay.classList.remove('active','profile-active');
     document.body.style.overflow = '';
 
     setTimeout(() => {
         modal.style.display = "none";
         modal.classList.remove("closing");
-    }, 200);
+    }, 300);
 }
+
+profileCard.addEventListener("click", openProfile);
 closeProfileBtn.addEventListener("click", closeProfile);
 
 window.addEventListener("click", (e) => {
@@ -196,13 +174,14 @@ window.addEventListener("click", (e) => {
         closeProfile();
 });
 
+
 // Fecth Data and load links
 async function loadFrontendLinks() {
     const container = document.getElementById("linksContainer");
     const iconBar = document.getElementById("iconBar");
 
     try {
-        const response = await fetchLinks();
+        const response = await getAllLinks();
         const data = response;
 
         if (!Array.isArray(data)) {
@@ -240,43 +219,134 @@ async function loadFrontendLinks() {
             });
         }
         container.innerHTML = "";
-        links.forEach(link => {
+        links.forEach((link, index) => {
             const a = document.createElement("a");
             a.href = link.url;
             a.target = "_blank";
             a.className = "tile w-100 mb-3 d-flex align-items-center position-relative text-white";
             a.innerHTML = `
-                    <i class="bi bi-${link.icon} fs-4 position-absolute start-0 ms-3"></i>
-                    <span class="mx-auto">${link.title}</span>
+            <i class="bi bi-${link.icon} fs-4 position-absolute start-0 ms-3"></i>
+            <span class="mx-auto">${link.title}</span>
 
-                    <div class="icon-link icon-link-hover position-absolute end-0 me-3" style="--bs-icon-link-transform: translate3d(0, -.145rem, 0);">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi" viewBox="0 0 16 16">
-                            <g class="icon-normal">
-                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                            </g>
-                            <g class="icon-success d-none">
-                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
-                            </g>
-                        </svg>
-                    </div>
+            <div class="icon-link icon-link-hover position-absolute end-0 me-3" style="--bs-icon-link-transform: translate3d(0, -.145rem, 0);">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi" viewBox="0 0 16 16">
+                    <g class="icon-normal">
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                    </g>
+                    <g class="icon-success d-none">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
+                    </g>
+                </svg>
+            </div>
             `;
+
             const copyBtn = a.querySelector('.icon-link');
             copyBtn.addEventListener('click', (e) => copyHref(e, copyBtn));
             container.appendChild(a);
         });
-
         linksLoaded = true;
         checkBothLoaded();
+        animationTest();
 
     } catch (error) {
         console.error("Failed to fetch links:", error);
         container.innerHTML = "<p class='text-center'>Failed to load links</p>";
-
         linksLoaded = true;
         checkBothLoaded();
     }
 }
+
+// Share Modal - Copy Link functionality
+function initShareCopyLink() {
+    const copyBtn = document.getElementById("copyLinkButton");
+    const copyInput = document.getElementById("copyLinkInput");
+
+    if (!copyBtn || !copyInput) return;
+
+    copyInput.value = window.location.href;
+
+    const fallbackCopy = () => {
+        copyInput.focus();
+        copyInput.select();
+        copyInput.setSelectionRange(0, copyInput.value.length);
+        const ok = document.execCommand("copy");
+        if (!ok) throw new Error("execCommand copy failed");
+    };
+
+    copyBtn.addEventListener("click", async () => {
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(copyInput.value);
+            } else {
+                fallbackCopy();
+            }
+            copyBtn.classList.add('copied');
+            copyBtn.textContent = "Copied!";
+
+            console.log("Link copied to clipboard");
+            setTimeout(() => {
+                copyBtn.classList.remove('copied');
+                copyBtn.style.transition = '0.3s ease';
+            }, 500);
+            setTimeout(() => (copyBtn.innerHTML = `<i class="bi bi-copy"></i> Copy`), 1500);
+        } catch (e) {
+            console.error("Copy failed:", e);
+            copyBtn.textContent = "Failed";
+            setTimeout(() => (copyBtn.innerHTML = `<i class="bi bi-copy"></i> Copy`), 1500);
+        }
+    });
+}
+
+function shareSite() {
+    if (navigator.share) {
+        navigator.share({
+            title: document.title,
+            text: "Check out this site!",
+            url: window.location.href
+        })
+            .then(() => console.log("Shared successfully"))
+            .catch((error) => console.error("Share failed:", error));
+    } else {
+        console.warn("Web Share API not supported.");
+    }
+}
+
+function shareTo(app) {
+    const url = encodeURIComponent(window.location.href);
+
+    let shareUrl = "";
+
+    switch (app) {
+        case "facebook":
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            break;
+        case "twitter":
+            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+            break;
+        case "telegram":
+            shareUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+            break;
+        case "whatsapp":
+            shareUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`;
+            break;
+        case "instagram":
+            if (navigator.share) {
+                navigator.share({ title: document.title, text, url });
+                return;
+            } else {
+                alert("Instagram sharing is only available via the app.");
+                return;
+            }
+            break;
+        default:
+            alert("Unsupported app for sharing");
+            console.warn("Unsupported app for sharing");
+            return;
+    }
+    window.open(shareUrl, '_blank');
+}
+
 
 // Copy to clipboard function
 function copyHref(evt, el) {
@@ -318,15 +388,40 @@ function copyHref(evt, el) {
     window.copyHref = copyHref;
 }
 
+function animationTest() {
+    gsap.set(".tile", { 
+        opacity: 0, 
+        y: -20 
+    });
+
+    gsap.to(".tile", {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power4.out",
+        delay: 0.2,
+        clearProps: "transform"
+    });
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     loadFrontendLinks();
+    initShareCopyLink();
+
+    // const myModal = new bootstrap.Modal(document.getElementById('shareModal'), {
+    //     keyboard: true
+    // });
+    // myModal.show();
 
     setTimeout(() => {
         if (!linksLoaded) {
-
             console.warn("Links loading timeout - hiding loader anyway");
             linksLoaded = true;
             checkBothLoaded();
         }
     }, 10000);
 });
+
+Object.assign(window, { shareSite, shareTo });
