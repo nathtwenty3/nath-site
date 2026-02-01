@@ -13,6 +13,27 @@ const slowTimer = setTimeout(() => {
     }
 }, 10000);
 
+let pageLoaded = false;
+let linksLoaded = false;
+
+
+function setLinksLoaded() {
+    linksLoaded = true;
+    checkBothLoaded();
+}
+
+function checkBothLoaded() {
+    if (pageLoaded && linksLoaded) {
+        hideLoader();
+    }
+}
+
+window.addEventListener('load', () => {
+    pageLoaded = true;
+    checkBothLoaded();
+});
+
+
 function hideLoader() {
     document.body.style.overflow = '';
     loader.style.display = 'none';
@@ -35,19 +56,8 @@ function hideLoader() {
     }
 }
 
-let pageLoaded = false;
-let linksLoaded = false;
 
-window.addEventListener('load', () => {
-    pageLoaded = true;
-    checkBothLoaded();
-});
 
-function checkBothLoaded() {
-    if (pageLoaded && linksLoaded) {
-        hideLoader();
-    }
-}
 
 //------------------------------
 const toggleBtn = document.getElementById('contactToggle');
@@ -302,12 +312,15 @@ function copyHref(evt, el) {
 }
 
 function animationTest() {
-    gsap.set(".tile", {
+    const tiles = document.querySelectorAll(".tile");
+    if (tiles.length === 0) return;
+
+    gsap.set(tiles, {
         opacity: 0,
         y: -20
     });
 
-    gsap.to(".tile", {
+    gsap.to(tiles, {
         y: 0,
         opacity: 1,
         duration: 0.6,
@@ -320,7 +333,7 @@ function animationTest() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    loadFrontendLinks();
+    loadFrontendLinks(animationTest, copyHref, setLinksLoaded);
     initShareCopyLink();
 
     // const myModal = new bootstrap.Modal(document.getElementById('shareModal'), {

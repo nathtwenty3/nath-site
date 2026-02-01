@@ -1,6 +1,4 @@
-
-// Fecth Data and load links
-async function loadFrontendLinks( onLoaded, animationTest, copyHref ,onError, checkBothLoaded) {
+export async function loadFrontendLinks( animationTest, copyHref, setLinksLoaded) {
     const container = document.getElementById("linksContainer");
     const iconBar = document.getElementById("iconBar");
 
@@ -16,10 +14,10 @@ async function loadFrontendLinks( onLoaded, animationTest, copyHref ,onError, ch
 
         if (!Array.isArray(data)) {
             container.innerHTML = "<p class='text-danger text-center'>No links found</p>";
-            linksLoaded = true;
-            checkBothLoaded();
+            setLinksLoaded();
             return;
         }
+
         // filter active links
         const links = data.filter(
             link => link.active === "TRUE" || link.active === true
@@ -75,14 +73,13 @@ async function loadFrontendLinks( onLoaded, animationTest, copyHref ,onError, ch
             copyBtn.addEventListener('click', (e) => copyHref(e, copyBtn));
             container.appendChild(a);
         });
-        linksLoaded = true;
-        checkBothLoaded();
+        
+        setLinksLoaded();
         animationTest();
 
     } catch (error) {
         console.error("Failed to fetch links:", error);
         container.innerHTML = "<p class='text-center'>Failed to load links</p>";
-        linksLoaded = true;
-        checkBothLoaded();
+        setLinksLoaded();
     }
 }

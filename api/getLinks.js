@@ -15,8 +15,14 @@
 //         throw err;
 //     }
 // }
+
 export default async function handler(req, res) {
-    const API_URL = process.env.API_URL;
+    const API_URL = process.env.SHEET_URL;
+
+    if(!API_URL) {
+        res.status(500).json({ error: "API_URL is not defined" });
+        return;
+    }
 
     try {
         const response = await fetch(`${API_URL}?action=get`, {
