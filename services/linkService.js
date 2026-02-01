@@ -1,5 +1,4 @@
 
-
 // Fecth Data and load links
 async function loadFrontendLinks( onLoaded, animationTest, copyHref ,onError, checkBothLoaded) {
     const container = document.getElementById("linksContainer");
